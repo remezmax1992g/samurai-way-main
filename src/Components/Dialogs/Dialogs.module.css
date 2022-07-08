@@ -11,6 +11,10 @@
     padding: 10px;
 }
 
-.messages{}
+.messages{
+    padding: 10px;
+}
 
-.message{}
+.message{
+    color: white;
+}

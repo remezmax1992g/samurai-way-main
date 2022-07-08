@@ -1,41 +1,42 @@
 import React from 'react';
 import classes from "./Dialogs.module.css"
-import {NavLink} from "react-router-dom";
+import DialogItem from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
+import {ProfilePropsType} from "../Profile/Profile";
+import {ArrayAppType} from "../../App";
 
-const DialogItem = (props:any) => {
-    let path = "/Dialogs/" + props.id;
-    return(
-        <div className={classes.dialog}>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
-    )
+type DialogType = {
+    id: number,
+    name: string,
 }
 
-const Message = (props: any) =>{
-    return(
-        <div className={classes.message}>{props.message}</div>
-    )
+type MesType = {
+    id: number,
+    message: string
 }
 
-const Dialogs = (props: any) => {
+export type DialogsArrayPropsType = {
+    dialogData: Array<DialogType>,
+    messagesData: Array<MesType>
+}
+
+export type DialogsPropsType = {
+    stateDialogs: DialogsArrayPropsType
+}
+
+
+const Dialogs = (props: DialogsPropsType) => {
+
+
+    let dialogElements = props.stateDialogs.dialogData.map(d =><DialogItem name={d.name} id={d.id}/>)
+    let messageElements = props.stateDialogs.messagesData.map(m => <Message message={m.message}/>)
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItem}>
-                <DialogItem name="Max" id="1"/>
-                <DialogItem name="Dima" id="2"/>
-                <DialogItem name="Andrey" id="3"/>
-                <DialogItem name="Victor" id="4"/>
-                <DialogItem name="Sveta" id="5"/>
-                <DialogItem name="Artur" id="6"/>
+                {dialogElements}
             </div>
             <div className={classes.messages}>
-                <Message message="Hi"/>
-                <Message message="How is your IT-learning?"/>
-                <Message message="How are you?"/>
-                <Message message="What are you doing"/>
-                <Message message="Bye"/>
-                <Message message="What's up"/>
-                <Message message="Sound great"/>
+                {messageElements}
             </div>
         </div>
     );

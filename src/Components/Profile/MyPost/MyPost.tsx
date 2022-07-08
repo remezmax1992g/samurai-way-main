@@ -2,7 +2,23 @@ import React from 'react';
 import classes from ".//MyPost.module.css";
 import Post from "./Post/Post";
 
-const MyPost = () => {
+type MessageType = {
+    id: number
+    message: string
+    likeCount: number
+}
+
+export type MyPostArrayPropsType = {
+    postsData: Array<MessageType>
+}
+
+type MyPostPropsType = {
+    statePostsData: MyPostArrayPropsType
+}
+
+const MyPost = (props: MyPostPropsType) => {
+
+    let postsElement = props.statePostsData.postsData.map(p => <Post message={p.message} likeCount={p.likeCount}/>)
     return (
         <div className={classes.postBlock}>
             <div>
@@ -13,8 +29,7 @@ const MyPost = () => {
                 <button>Add post</button>
             </div>
             <div className={classes.posts}>
-                <Post message="Hi, how are you?"/>
-                <Post message="It's my first post"/>
+                {postsElement}
             </div>
         </div>
     );
