@@ -5,7 +5,11 @@ import {NavLink} from "react-router-dom";
 
 const Message = (props: any) => {
     return (
-        <div className={classes.message}>{props.message}</div>
+        <div className={classes.message}>
+            <div>{props.message}</div>
+            <textarea></textarea>
+            <button>Send</button>
+        </div>
     )
 }
 
