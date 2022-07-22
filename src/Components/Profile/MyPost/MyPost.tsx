@@ -1,13 +1,12 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import classes from ".//MyPost.module.css";
 import Post from "./Post/Post";
-import {ProfilePageType} from "../../../Redux/state";
+import {ActionType, addPostActionCreator, ProfilePageType, updateNewPostActionCreator} from "../../../Redux/state";
 
 type PostPropsType = {
     statePost: ProfilePageType
-    addPost: () => void
     newPostText: string
-    onChangeNewPostHandler: (newPostText: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 const MyPost = (props: PostPropsType) => {
@@ -16,17 +15,17 @@ const MyPost = (props: PostPropsType) => {
                                                                     likeCount={p.likeCount}/>)
 
         let addPost = () => {
-            props.addPost()
+            props.dispatch(addPostActionCreator())
         }
 
         let addPostKeyboard = (event: KeyboardEvent<HTMLTextAreaElement>) => {
             if (event.key === "Enter" && event.ctrlKey === true) {
-                props.addPost()
+                props.dispatch(addPostActionCreator())
             }
         }
 
         let onChangeNewPostHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-            props.onChangeNewPostHandler(event.currentTarget.value)
+            props.dispatch(updateNewPostActionCreator(event.currentTarget.value))
         }
 
         return (
