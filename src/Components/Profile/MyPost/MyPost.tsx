@@ -1,13 +1,13 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import classes from ".//MyPost.module.css";
 import Post from "./Post/Post";
-import {ActionType, ProfilePageType} from "../../../Redux/store";
-import {addPostActionCreator, updateNewPostActionCreator} from "../../../Redux/profile-reducer";
+import {ProfilePageType} from "../../../Redux/store";
 
 type PostPropsType = {
     statePost: ProfilePageType
-    newPostText: string
-    dispatch: (action: ActionType) => void
+    addPost: () => void
+    addPostKeyboard: () => void
+    onChangeNewPost: (newPost: string) => void
 }
 
 const MyPost = (props: PostPropsType) => {
@@ -15,18 +15,19 @@ const MyPost = (props: PostPropsType) => {
         let postsElement = props.statePost.postsData.map(p => <Post key={p.id} message={p.message}
                                                                     likeCount={p.likeCount}/>)
 
-        let addPost = () => {
-            props.dispatch(addPostActionCreator())
+        let addPostClick = () => {
+            props.addPost()
         }
 
-        let addPostKeyboard = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+        let addPostKeyboardClick = (event: KeyboardEvent<HTMLTextAreaElement>) => {
             if (event.key === "Enter" && event.ctrlKey) {
-                props.dispatch(addPostActionCreator())
+                props.addPost()
             }
         }
 
         let onChangeNewPostHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-            props.dispatch(updateNewPostActionCreator(event.currentTarget.value))
+            let newPost = event.currentTarget.value
+            props.onChangeNewPost(newPost)
         }
 
         return (
@@ -35,10 +36,10 @@ const MyPost = (props: PostPropsType) => {
                     <h2>My posts</h2>
                 </div>
                 <div><textarea onChange={onChangeNewPostHandler}
-                               value={props.newPostText}
-                               onKeyDown={addPostKeyboard}></textarea></div>
+                               value={props.statePost.newPostText}
+                               onKeyDown={addPostKeyboardClick}></textarea></div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={addPostClick}>Add post</button>
                 </div>
                 <div className={classes.posts}>
                     {postsElement}

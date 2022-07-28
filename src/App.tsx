@@ -7,25 +7,23 @@ import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
 import {StoreType} from "./Redux/store";
-import Dialogs from "./Components/Dialogs/Dialogs";
 import Profile from "./Components/Profile/Profile";
+import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
 type AppType = {
     store: StoreType
 }
 
 function App(props: AppType) {
-    const state = props.store.getState()
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <NavBar/>
                 <div className="app-wrapper-content">
-                    <Route exact path="/Dialogs" render={() => <Dialogs stateDialog={state.dialogsPage}
-                                                                        dispatch={props.store.dispatch.bind(props.store)}/>}/>
-                    <Route exact path="/Profile" render={() => <Profile statePostsData={state.profilePage}
-                                                                        dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                    <Route exact path="/Dialogs" render={() => <DialogsContainer store={props.store}/>}/>
+                    <Route exact path="/Profile" render={() => <Profile store={props.store}/>}/>
                     <Route exact path="/News" render={() => <News/>}/>
                     <Route exact path="/Music" render={() => <Music/>}/>
                     <Route exact path="/Settings" render={() => <Settings/>}/>
