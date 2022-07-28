@@ -1,42 +1,38 @@
-const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST = "UPDATE-NEW-POST";
+import profileReducer, {addPostActionCreator, updateNewPostActionCreator} from "./profile-reducer";
+import dialogsReducer, {sendNewMessageActionCreator, updateMessageTextActionCreator} from "./dialogs-reducer";
 
-type DialogDataType = {
+//type
+export type DialogDataType = {
     id: number,
     name: string,
 }
-
-type MessagesDataType = {
+export type MessagesDataType = {
     id: number,
     message: string,
 }
-
-type PostsDataType = {
+export type PostsDataType = {
     id: number,
     message: string,
     likeCount: number,
 }
-
 export type DialogsPageType = {
     dialogData: Array<DialogDataType>,
     messagesData: Array<MessagesDataType>,
+    newMessageText: string
 }
-
 export type ProfilePageType = {
     postsData: Array<PostsDataType>,
     newPostText: string,
 }
-
 export type RootStateType = {
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType,
 }
-
-type AddPostActionType = ReturnType<typeof  addPostActionCreator>
+type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type UpdateNewPostActionType = ReturnType<typeof updateNewPostActionCreator>
-
-export type ActionType = AddPostActionType | UpdateNewPostActionType
-
+type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
+type SendNewMessageActionType = ReturnType<typeof sendNewMessageActionCreator>
+export type ActionType = AddPostActionType | UpdateNewPostActionType | UpdateMessageTextActionType | SendNewMessageActionType
 export type StoreType = {
     //state
     _state: RootStateType
@@ -44,10 +40,11 @@ export type StoreType = {
     //function
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
-    dispatch: (action: AddPostActionType | UpdateNewPostActionType) => void
+    dispatch: (action: ActionType) => void
 }
-
+//store
 const store: StoreType = {
+    //state
     _state: {
         profilePage: {
             postsData: [
@@ -74,40 +71,24 @@ const store: StoreType = {
                 {id: 5, name: "Sveta"},
                 {id: 6, name: "Artur"}
             ],
+            newMessageText: ""
         },
     },
-
-    _callSubscriber(){
+    //function
+    _callSubscriber() {
         console.log("State was changed")
     },
-    getState(){return this._state},
-
-    subscribe(observer: () => void){
+    getState() {
+        return this._state
+    },
+    subscribe(observer: () => void) {
         this._callSubscriber = observer
     },
-
-    dispatch(action: AddPostActionType | UpdateNewPostActionType){
-        if(action.type === ADD_POST){
-            let newPost: PostsDataType = {
-                id: this._state.profilePage.postsData.length + 1,
-                message: this._state.profilePage.newPostText,
-                likeCount: 0
-            }
-            this._state.profilePage.postsData.push(newPost);
-            this._state.profilePage.newPostText = "";
-            this._callSubscriber()
-        }
-        else if(action.type === UPDATE_NEW_POST){
-            this._state.profilePage.newPostText = action.newPostText
-            this._callSubscriber()
-        }
+    dispatch(action: ActionType) {
+        this._state.profilePage = profileReducer(this.getState().profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this.getState().dialogsPage, action)
+        this._callSubscriber()
     }
-
 }
-
-export const addPostActionCreator = () =>{
-    return {type: ADD_POST} as const
-}
-export const updateNewPostActionCreator = (newPost: string) =>({type: UPDATE_NEW_POST, newPostText: newPost}) as const
 
 export default store

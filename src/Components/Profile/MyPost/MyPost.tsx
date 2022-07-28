@@ -1,7 +1,8 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import classes from ".//MyPost.module.css";
 import Post from "./Post/Post";
-import {ActionType, addPostActionCreator, ProfilePageType, updateNewPostActionCreator} from "../../../Redux/state";
+import {ActionType, ProfilePageType} from "../../../Redux/store";
+import {addPostActionCreator, updateNewPostActionCreator} from "../../../Redux/profile-reducer";
 
 type PostPropsType = {
     statePost: ProfilePageType
@@ -19,7 +20,7 @@ const MyPost = (props: PostPropsType) => {
         }
 
         let addPostKeyboard = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-            if (event.key === "Enter" && event.ctrlKey === true) {
+            if (event.key === "Enter" && event.ctrlKey) {
                 props.dispatch(addPostActionCreator())
             }
         }

@@ -6,7 +6,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import {StoreType} from "./Redux/state";
+import {StoreType} from "./Redux/store";
 import Dialogs from "./Components/Dialogs/Dialogs";
 import Profile from "./Components/Profile/Profile";
 
@@ -22,10 +22,10 @@ function App(props: AppType) {
                 <Header/>
                 <NavBar/>
                 <div className="app-wrapper-content">
-                    <Route exact path="/Dialogs" render={() => <Dialogs stateDialog={state.dialogsPage}/>}/>
+                    <Route exact path="/Dialogs" render={() => <Dialogs stateDialog={state.dialogsPage}
+                                                                        dispatch={props.store.dispatch.bind(props.store)}/>}/>
                     <Route exact path="/Profile" render={() => <Profile statePostsData={state.profilePage}
-                                                                        dispatch={props.store.dispatch.bind(props.store)}
-                                                                        />}/>
+                                                                        dispatch={props.store.dispatch.bind(props.store)}/>}/>
                     <Route exact path="/News" render={() => <News/>}/>
                     <Route exact path="/Music" render={() => <Music/>}/>
                     <Route exact path="/Settings" render={() => <Settings/>}/>
