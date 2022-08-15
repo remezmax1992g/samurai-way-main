@@ -10,11 +10,8 @@ import {StoreType} from "./Redux/store";
 import Profile from "./Components/Profile/Profile";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
-type AppType = {
-    store: StoreType
-}
 
-function App(props: AppType) {
+function App() {
 
     return (
         <BrowserRouter>
@@ -22,8 +19,8 @@ function App(props: AppType) {
                 <Header/>
                 <NavBar/>
                 <div className="app-wrapper-content">
-                    <Route exact path="/Dialogs" render={() => <DialogsContainer store={props.store}/>}/>
-                    <Route exact path="/Profile" render={() => <Profile store={props.store}/>}/>
+                    <Route exact path="/Dialogs" render={() => <DialogsContainer/>}/>
+                    <Route exact path="/Profile" render={() => <Profile/>}/>
                     <Route exact path="/News" render={() => <News/>}/>
                     <Route exact path="/Music" render={() => <Music/>}/>
                     <Route exact path="/Settings" render={() => <Settings/>}/>

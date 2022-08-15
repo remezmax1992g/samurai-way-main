@@ -1,39 +1,41 @@
 import {ActionType, DialogsPageType, MessagesDataType} from "./store";
+import {v1} from "uuid";
 
 const SEND_NEW_MESSAGE = "SEND-NEW-MESSAGE";
 const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT"
 let initialState = {
     messagesData: [
-        {id: 1, message: "Hi"},
-        {id: 2, message: "How is your IT-learning?"},
-        {id: 3, message: "How are you?"},
-        {id: 4, message: "What are you doing"},
-        {id: 5, message: "Bye"},
-        {id: 6, message: "What's up"},
-        {id: 7, message: "Sound great"},
+        {id: v1(), message: "Hi"},
+        {id: v1(), message: "How is your IT-learning?"},
+        {id: v1(), message: "How are you?"},
+        {id: v1(), message: "What are you doing"},
+        {id: v1(), message: "Bye"},
+        {id: v1(), message: "What's up"},
+        {id: v1(), message: "Sound great"},
     ],
     dialogData: [
-        {id: 1, name: "Max"},
-        {id: 2, name: "Dima"},
-        {id: 3, name: "Andrey"},
-        {id: 4, name: "Victor"},
-        {id: 5, name: "Sveta"},
-        {id: 6, name: "Artur"}
+        {id: v1(), name: "Max"},
+        {id: v1(), name: "Dima"},
+        {id: v1(), name: "Andrey"},
+        {id: v1(), name: "Victor"},
+        {id: v1(), name: "Sveta"},
+        {id: v1(), name: "Artur"}
     ],
     newMessageText: ""
 }
 const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType) => {
+    debugger
     switch (action.type) {
         case SEND_NEW_MESSAGE:
             let newMessage: MessagesDataType = {
-                id: state.messagesData.length + 1,
+                id: v1(),
                 message: state.newMessageText,
             }
             state.messagesData.push(newMessage)
             state.newMessageText = ""
             return state
         case UPDATE_MESSAGE_TEXT:
-            state.newMessageText = action.newMessageText
+            state.newMessageText = action.payload.newMessageText
             return state
         default:
             return state
@@ -42,7 +44,7 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionTyp
 
 export const updateMessageTextActionCreator = (newMessageText: string) => ({
     type: UPDATE_MESSAGE_TEXT,
-    newMessageText: newMessageText
+    payload: {newMessageText}
 }) as const
 export const sendNewMessageActionCreator = () => ({type: SEND_NEW_MESSAGE}) as const
 
