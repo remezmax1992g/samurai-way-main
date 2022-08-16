@@ -1,17 +1,14 @@
-import profileReducer, {
-    addPostActionCreator,
-    AddPostActionType, ProfilePageType,
-    updateNewPostActionCreator,
+import {
+    AddPostActionType,
+    ProfilePageType,
     UpdateNewPostActionType
 } from "./profile-reducer";
-import dialogsReducer, {
+import {
     DialogsPageType,
-    sendNewMessageActionCreator, SendNewMessageActionType,
-    updateMessageTextActionCreator,
+    SendNewMessageActionType,
     UpdateMessageTextActionType
 } from "./dialogs-reducer";
-import {v1} from "uuid";
-import sidebarReducer, {SidebarPageType} from "./sidebar-reducer";
+import {SidebarPageType} from "./sidebar-reducer";
 import {
     FollowToUserActionCreatorType,
     SetUsersActionCreatorType,
@@ -44,6 +41,7 @@ export type StoreType = {
     dispatch: (action: ActionType) => void
 }
 //store
+/*
 const store: StoreType = {
     //state
     _state: {
@@ -134,4 +132,4 @@ const store: StoreType = {
     }
 }
 
-export default store
+export default store*/

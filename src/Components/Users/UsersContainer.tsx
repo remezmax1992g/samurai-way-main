@@ -13,8 +13,8 @@ type MapStateToPropsForUsersContainerType = {
     users: Array<UsersType>
 }
 type MapDispatchToPropsForUsersContainerType = {
-    followToUser: (userID:string) => void,
-    unfollowToUser: (userID:string) => void,
+    followToUser: (userID:number) => void,
+    unfollowToUser: (userID:number) => void,
     setUsers: (users: Array<UsersType>) => void
 }
 
@@ -22,13 +22,13 @@ export type UsersContainerType = MapDispatchToPropsForUsersContainerType & MapSt
 
 let mapStateToProps = (state:AppStateType): MapStateToPropsForUsersContainerType => {
     return{
-        users: state.userPage.users
+        users: state.userPage.items
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsForUsersContainerType => {
     return{
-        followToUser: (userID: string) => dispatch(followToUserActionCreator(userID)),
-        unfollowToUser: (userID: string) => dispatch(unfollowToUserActionCreator(userID)),
+        followToUser: (userID: number) => dispatch(followToUserActionCreator(userID)),
+        unfollowToUser: (userID: number) => dispatch(unfollowToUserActionCreator(userID)),
         setUsers: (users: Array<UsersType>) => dispatch(setUsersActionCreator(users))
     }
 }
