@@ -6,8 +6,8 @@ import {DialogsContainerPropsType} from "./DialogsContainer";
 
 const Dialogs = (props: DialogsContainerPropsType) => {
     //value
-    let dialogElements = props.stateDialog.dialogData.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messageElements = props.stateDialog.messagesData.map(m => <Message message={m.message}/>)
+    let dialogElements = props.stateDialog.dialogData.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messageElements = props.stateDialog.messagesData.map(m => <Message key={m.id} message={m.message}/>)
     //function
     const sendNewMessageClick = () => {
         props.sendNewMessage()

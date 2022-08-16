@@ -24,19 +24,15 @@ let initialState = {
     newMessageText: ""
 }
 const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
-    debugger
     switch (action.type) {
         case SEND_NEW_MESSAGE:
             let newMessage: MessagesDataType = {
                 id: v1(),
                 message: state.newMessageText,
             }
-            state.messagesData.push(newMessage)
-            state.newMessageText = ""
-            return state
+            return {...state, messagesData: [...state.messagesData, newMessage], newMessageText: ""}
         case UPDATE_MESSAGE_TEXT:
-            state.newMessageText = action.payload.newMessageText
-            return state
+            return {...state, newMessageText: action.payload.newMessageText}
         default:
             return state
     }
