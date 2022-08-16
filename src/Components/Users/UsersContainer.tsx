@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from "react-redux";
-import Users from "./Users";
 import {
     followToUserActionCreator, setUsersActionCreator,
     unfollowToUserActionCreator,
@@ -8,6 +7,7 @@ import {
 } from "../../Redux/users-reducer";
 import {Dispatch} from "redux";
 import {AppStateType} from "../../Redux/redux-store";
+import Users from "./Users";
 
 type MapStateToPropsForUsersContainerType = {
     users: Array<UsersType>
