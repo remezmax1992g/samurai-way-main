@@ -1,42 +1,38 @@
-import profileReducer, {addPostActionCreator, updateNewPostActionCreator} from "./profile-reducer";
-import dialogsReducer, {sendNewMessageActionCreator, updateMessageTextActionCreator} from "./dialogs-reducer";
+import profileReducer, {
+    addPostActionCreator,
+    AddPostActionType, ProfilePageType,
+    updateNewPostActionCreator,
+    UpdateNewPostActionType
+} from "./profile-reducer";
+import dialogsReducer, {
+    DialogsPageType,
+    sendNewMessageActionCreator, SendNewMessageActionType,
+    updateMessageTextActionCreator,
+    UpdateMessageTextActionType
+} from "./dialogs-reducer";
 import {v1} from "uuid";
-import sidebarReducer from "./sidebar-reducer";
+import sidebarReducer, {SidebarPageType} from "./sidebar-reducer";
+import {
+    FollowToUserActionCreatorType,
+    SetUsersActionCreatorType,
+    UnfollowToUserActionCreatorType, UsersPageType
+} from "./users-reducer";
 
 //type
-export type DialogDataType = {
-    id: string,
-    name: string,
-}
-export type MessagesDataType = {
-    id: string,
-    message: string,
-}
-export type PostsDataType = {
-    id: string,
-    message: string,
-    likeCount: number,
-}
-export type DialogsPageType = {
-    dialogData: Array<DialogDataType>,
-    messagesData: Array<MessagesDataType>,
-    newMessageText: string
-}
-export type ProfilePageType = {
-    postsData: Array<PostsDataType>,
-    newPostText: string,
-}
-export type SidebarType ={}
 export type RootStateType = {
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType,
-    sidebar: SidebarType
+    sidebarPage: SidebarPageType
+    userPage: UsersPageType
 }
-type AddPostActionType = ReturnType<typeof addPostActionCreator>
-type UpdateNewPostActionType = ReturnType<typeof updateNewPostActionCreator>
-type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
-type SendNewMessageActionType = ReturnType<typeof sendNewMessageActionCreator>
-export type ActionType = AddPostActionType | UpdateNewPostActionType | UpdateMessageTextActionType | SendNewMessageActionType
+export type ActionType =
+    AddPostActionType
+    | UpdateNewPostActionType
+    | UpdateMessageTextActionType
+    | SendNewMessageActionType
+    | FollowToUserActionCreatorType
+    | UnfollowToUserActionCreatorType
+    | SetUsersActionCreatorType
 export type StoreType = {
     //state
     _state: RootStateType
@@ -66,7 +62,7 @@ const store: StoreType = {
                 {id: v1(), message: "What are you doing"},
                 {id: v1(), message: "Bye"},
                 {id: v1(), message: "What's up"},
-                {id:v1(), message: "Sound great"},
+                {id: v1(), message: "Sound great"},
             ],
             dialogData: [
                 {id: v1(), name: "Max"},
@@ -78,7 +74,44 @@ const store: StoreType = {
             ],
             newMessageText: ""
         },
-        sidebar: {}
+        sidebarPage: {},
+        userPage: {
+            users: [
+                {
+                    id: v1(),
+                    follow: false,
+                    fullName: "Maxim",
+                    status: "I'm boss",
+                    location: {city: "Minsk", country: "Belarus"},
+                    photoUrl:"https://sun9-44.userapi.com/impf/c837437/v837437877/1c8b3/1oyCdQScwEY.jpg?size=2560x1920&quality=96&sign=46274b18ea4bae87fee7ceea49983881&type=album"
+                },
+                {
+                    id: v1(),
+                    follow: true,
+                    fullName: "Artem",
+                    status: "I'm boss",
+                    location: {city: "Moscow", country: "Russia"},
+                    photoUrl: "https://sun2.beltelecom-by-minsk.userapi.com/impg/x-6BrTMlYjtGtPchPHQUT6v0o1EkWh08GWiDsw/fumKmvIYugc.jpg?size=1067x1601&quality=96&sign=456da46bcc49287764e8483aea2a1c44&type=album"
+                },
+                {
+                    id: v1(),
+                    follow: false,
+                    fullName: "Alex",
+                    status: "I'm boss",
+                    location: {city: "Kiev", country: "Ukraine"},
+                    photoUrl: "https://sun9-64.userapi.com/impg/RWYP17KNufgHQHHkmw3a0pdZQESsOVwjo532hg/j_mdcacpszc.jpg?size=1152x2048&quality=96&sign=09235f4485cc7a4eebd3dfee3e0c6d6e&type=album"
+
+                },
+                {
+                    id: v1(),
+                    follow: true,
+                    fullName: "Pavel",
+                    status: "I'm boss",
+                    location: {city: "Berlin", country: "Germany"},
+                    photoUrl: "https://sun9-41.userapi.com/impg/6YA9vXfZ-BYNjuOrkpL2_j-u-hZSbZfxyofKxg/nGy2ezA9RKo.jpg?size=1442x2160&quality=96&sign=d78d458081655cdfe78b4186a99163eb&type=album"
+                },
+            ]
+        }
     },
     //function
     _callSubscriber() {
@@ -87,7 +120,7 @@ const store: StoreType = {
     getState() {
         return this._state
     },
-    setState(state: RootStateType){
+    setState(state: RootStateType) {
         this._state = state
     },
     subscribe(observer: () => void) {
@@ -96,7 +129,7 @@ const store: StoreType = {
     dispatch(action: ActionType) {
         this._state.profilePage = profileReducer(this.getState().profilePage, action)
         this._state.dialogsPage = dialogsReducer(this.getState().dialogsPage, action)
-        this._state.sidebar = sidebarReducer(this.getState().sidebar, action)
+        this._state.sidebarPage = sidebarReducer(this.getState().sidebarPage, action)
         this._callSubscriber()
     }
 }

@@ -1,5 +1,17 @@
-import {ActionType, PostsDataType, ProfilePageType} from "./store";
+import {ActionType} from "./store";
 import {v1} from "uuid";
+
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type UpdateNewPostActionType = ReturnType<typeof updateNewPostActionCreator>
+export type ProfilePageType = {
+    postsData: Array<PostsDataType>,
+    newPostText: string,
+}
+export type PostsDataType = {
+    id: string,
+    message: string,
+    likeCount: number,
+}
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST = "UPDATE-NEW-POST";
