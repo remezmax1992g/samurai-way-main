@@ -1,16 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import classes from ".//MyPost.module.css";
 import Post from "./Post/Post";
-import {ProfilePageType} from "../../../Redux/store";
+import {MyPostContainerPropsType} from "./MyPostContainer";
 
-type PostPropsType = {
-    statePost: ProfilePageType
-    addPost: () => void
-    addPostKeyboard: () => void
-    onChangeNewPost: (newPost: string) => void
-}
-
-const MyPost = (props: PostPropsType) => {
+const MyPost = (props: MyPostContainerPropsType) => {
 
         let postsElement = props.statePost.postsData.map(p => <Post key={p.id} message={p.message}
                                                                     likeCount={p.likeCount}/>)

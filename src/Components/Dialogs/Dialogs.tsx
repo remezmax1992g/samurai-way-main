@@ -2,16 +2,9 @@ import React, {ChangeEvent} from 'react';
 import classes from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPageType} from "../../Redux/store";
+import {DialogsContainerPropsType} from "./DialogsContainer";
 
-type DialogsPropsType = {
-    //value
-    stateDialog: DialogsPageType
-    //function
-    sendNewMessage: () => void
-    upDateMessageTextChange:(newMessageText: string) => void
-}
-const Dialogs = (props: DialogsPropsType) => {
+const Dialogs = (props: DialogsContainerPropsType) => {
     //value
     let dialogElements = props.stateDialog.dialogData.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messageElements = props.stateDialog.messagesData.map(m => <Message message={m.message}/>)
@@ -21,7 +14,7 @@ const Dialogs = (props: DialogsPropsType) => {
     }
     const updateMessageTextChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let newMessageText = event.currentTarget.value
-        props.upDateMessageTextChange(newMessageText)
+        props.updateMessageTextChange(newMessageText)
     }
     //JSX
     return (

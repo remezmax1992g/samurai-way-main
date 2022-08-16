@@ -6,7 +6,6 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import {StoreType} from "./Redux/store";
 import Profile from "./Components/Profile/Profile";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 

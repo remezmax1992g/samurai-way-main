@@ -23,7 +23,7 @@ let initialState = {
     ],
     newMessageText: ""
 }
-const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType) => {
+const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
     debugger
     switch (action.type) {
         case SEND_NEW_MESSAGE:
