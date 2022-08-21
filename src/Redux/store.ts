@@ -11,7 +11,7 @@ import {
 import {SidebarPageType} from "./sidebar-reducer";
 import {
     FollowToUserActionCreatorType, SetCurrentPageActionCreatorType, SetTotalUsersCounterActionCreatorType,
-    SetUsersActionCreatorType,
+    SetUsersActionCreatorType, ToggleIsFetchingActionCreatorType,
     UnfollowToUserActionCreatorType, UsersPageType
 } from "./users-reducer";
 
@@ -32,6 +32,7 @@ export type ActionType =
     | SetUsersActionCreatorType
     | SetCurrentPageActionCreatorType
     | SetTotalUsersCounterActionCreatorType
+    | ToggleIsFetchingActionCreatorType
 export type StoreType = {
     //state
     _state: RootStateType
