@@ -17,7 +17,7 @@ type MapDispatchToPropsForMyPostContainerType = {
 
 export type MyPostContainerPropsType = MapStateToPropsForMyPostContainerType & MapDispatchToPropsForMyPostContainerType
 
-let mapSateToProps = (state: AppStateType): MapStateToPropsForMyPostContainerType => {
+let mapStateToProps = (state: AppStateType): MapStateToPropsForMyPostContainerType => {
     return {
         statePost: state.profilePage
     }
@@ -31,6 +31,6 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsForMyPostContai
     }
 }
 
-const MyPostContainer = connect(mapSateToProps, mapDispatchToProps)(MyPost)
+const MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost)
 
 export default MyPostContainer;

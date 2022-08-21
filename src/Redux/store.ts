@@ -10,7 +10,7 @@ import {
 } from "./dialogs-reducer";
 import {SidebarPageType} from "./sidebar-reducer";
 import {
-    FollowToUserActionCreatorType,
+    FollowToUserActionCreatorType, SetCurrentPageActionCreatorType, SetTotalUsersCounterActionCreatorType,
     SetUsersActionCreatorType,
     UnfollowToUserActionCreatorType, UsersPageType
 } from "./users-reducer";
@@ -30,6 +30,8 @@ export type ActionType =
     | FollowToUserActionCreatorType
     | UnfollowToUserActionCreatorType
     | SetUsersActionCreatorType
+    | SetCurrentPageActionCreatorType
+    | SetTotalUsersCounterActionCreatorType
 export type StoreType = {
     //state
     _state: RootStateType
