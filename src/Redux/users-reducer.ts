@@ -23,12 +23,12 @@ export type UsersPageType = {
     isFetching: boolean
 }
 
-export type FollowToUserActionCreatorType = ReturnType<typeof followToUserActionCreator>
-export type UnfollowToUserActionCreatorType = ReturnType<typeof unfollowToUserActionCreator>
-export type SetUsersActionCreatorType = ReturnType<typeof setUsersActionCreator>
-export type SetCurrentPageActionCreatorType = ReturnType<typeof setCurrentPageActionCreator>
-export type SetTotalUsersCounterActionCreatorType = ReturnType<typeof setTotalUsersCountActionCreator>
-export type ToggleIsFetchingActionCreatorType = ReturnType<typeof toggleIsFetchingActionCreator>
+export type FollowToUserActionCreatorType = ReturnType<typeof followToUser>
+export type UnfollowToUserActionCreatorType = ReturnType<typeof unfollowToUser>
+export type SetUsersActionCreatorType = ReturnType<typeof setUsers>
+export type SetCurrentPageActionCreatorType = ReturnType<typeof setCurrentPage>
+export type SetTotalUsersCounterActionCreatorType = ReturnType<typeof setTotalUsersCount>
+export type ToggleIsFetchingActionCreatorType = ReturnType<typeof toggleIsFetching>
 
 const FOLLOW_TO_USER = "FOLLOW-TO-USER"
 const UNFOLLOW_TO_USER = "UNFOLLOW-TO-USER"
@@ -65,27 +65,27 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
     }
 }
 //actionCreator
-export const followToUserActionCreator = (userID: number) => ({
+export const followToUser = (userID: number) => ({
     type: FOLLOW_TO_USER,
     payload: {userID}
 }) as const
-export const unfollowToUserActionCreator = (userID: number) => ({
+export const unfollowToUser = (userID: number) => ({
     type: UNFOLLOW_TO_USER,
     payload: {userID}
 }) as const
-export const setUsersActionCreator = (users: Array<UsersType>) => ({
+export const setUsers = (users: Array<UsersType>) => ({
     type: SET_USERS,
     payload: {users}
 }) as const
-export const setCurrentPageActionCreator = (currentPage: number) => ({
+export const setCurrentPage = (currentPage: number) => ({
     type: SET_CURRENT_PAGE,
     payload: {currentPage}
 }) as const
-export const setTotalUsersCountActionCreator = (totalCount: number) => ({
+export const setTotalUsersCount = (totalCount: number) => ({
     type: SET_TOTAL_USERS_COUNT,
     payload: {totalCount}
 }) as const
-export const toggleIsFetchingActionCreator = (isFetching: boolean) => ({
+export const toggleIsFetching = (isFetching: boolean) => ({
     type: TOGGLE_IS_FETCHING,
     payload: {isFetching}
 }) as const

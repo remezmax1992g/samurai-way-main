@@ -1,15 +1,14 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    followToUserActionCreator,
-    setCurrentPageActionCreator,
-    setTotalUsersCountActionCreator,
-    setUsersActionCreator,
-    toggleIsFetchingActionCreator,
-    unfollowToUserActionCreator,
+    followToUser,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    unfollowToUser,
     UsersType
 } from "../../Redux/users-reducer";
-import {Dispatch} from "redux";
 import {AppStateType} from "../../Redux/redux-store";
 import axios from "axios";
 import Users from "./Users";
@@ -82,7 +81,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsForUsersContainerTyp
         isFetching: state.userPage.isFetching
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsForUsersContainerType => {
+/*let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsForUsersContainerType => {
     return {
         followToUser: (userID: number) => dispatch(followToUserActionCreator(userID)),
         unfollowToUser: (userID: number) => dispatch(unfollowToUserActionCreator(userID)),
@@ -91,7 +90,8 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsForUsersContain
         setTotalUsersCount: (totalCount: number) => dispatch(setTotalUsersCountActionCreator(totalCount)),
         toggleIsFetching: (isFetching: boolean) => dispatch(toggleIsFetchingActionCreator(isFetching))
     }
-}
+}*/
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps,
+    {followToUser, unfollowToUser, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(UsersContainer);
