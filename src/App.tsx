@@ -14,20 +14,18 @@ import ProfileContainer from "./Components/Profile/ProfileContainer";
 function App() {
 
     return (
-        <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <NavBar/>
                 <div className="app-wrapper-content">
                     <Route exact path="/Dialogs" render={() => <DialogsContainer/>}/>
-                    <Route exact path="/Profile" render={() => <ProfileContainer />}/>
+                    <Route exact path="/Profile/:userId?" render={() => <ProfileContainer />}/>
                     <Route exact path="/Users" render={() => <UsersContainer/>}/>
                     <Route exact path="/News" render={() => <News/>}/>
                     <Route exact path="/Music" render={() => <Music/>}/>
                     <Route exact path="/Settings" render={() => <Settings/>}/>
                 </div>
             </div>
-        </BrowserRouter>
     );
 }
 
