@@ -20,7 +20,7 @@ const MyPost = (props: MyPostContainerPropsType) => {
 
         let onChangeNewPostHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
             let newPost = event.currentTarget.value
-            props.onChangeNewPost(newPost)
+            props.updateNewPost(newPost)
         }
 
         return (

@@ -1,7 +1,7 @@
 import {
-    AddPostActionType,
-    ProfilePageType,
-    UpdateNewPostActionType
+    AddPostActionCreatorType,
+    ProfilePageType, SetProfileActionCreatorType, UpdateNewPostActionCreatorType,
+
 } from "./profile-reducer";
 import {
     DialogsPageType,
@@ -23,8 +23,8 @@ export type RootStateType = {
     userPage: UsersPageType
 }
 export type ActionType =
-    AddPostActionType
-    | UpdateNewPostActionType
+    AddPostActionCreatorType
+    | UpdateNewPostActionCreatorType
     | UpdateMessageTextActionType
     | SendNewMessageActionType
     | FollowToUserActionCreatorType
@@ -33,6 +33,7 @@ export type ActionType =
     | SetCurrentPageActionCreatorType
     | SetTotalUsersCounterActionCreatorType
     | ToggleIsFetchingActionCreatorType
+    | SetProfileActionCreatorType
 export type StoreType = {
     //state
     _state: RootStateType

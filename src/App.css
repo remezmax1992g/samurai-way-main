@@ -1,13 +1,14 @@
 .app-wrapper{
   display: grid;
   margin: 0 auto;
-  width: 1200px;
+  width: 1750px;
+  min-height: 800px;
 
   grid-template-areas:
 "header header"
 "nav content";
-  grid-template-rows: 60px 1fr;
-  grid-template-columns: 2fr 10fr;
+  grid-template-rows: 100px 1fr;
+  grid-template-columns: 1.75fr 10fr;
   /*grid-gap: 10px;*/
 }
 .app-wrapper-content {
