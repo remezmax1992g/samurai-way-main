@@ -4,9 +4,9 @@ import style from "./Preloader.module.css"
 
 const Preloader = () => {
     return (
-        <div className={style.preloader}>
+        <span className={style.preloader}>
             <img src={preloader}/>
-        </div>
+        </span>
     );
 };
 
