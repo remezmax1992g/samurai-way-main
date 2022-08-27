@@ -3,7 +3,7 @@ import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import {UsersType} from "../../Redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -43,28 +43,18 @@ const Users = (props: UsersPropsType) => {
                         <div>
                             {u.followed
                                 ? <button onClick={() => {
-                                    axios.delete("https://social-network.samuraijs.com/api/1.0/follow/" + u.id, {
-                                        withCredentials: true,
-                                        headers: {
-                                            "API-KEY": "8a3ca6c1-dfb0-48cf-8608-08d82687d761"
-                                        }
-                                    })
-                                        .then(response => {
-                                            if (response.data.resultCode === 0) {
+                                    usersAPI.deleteFollow(u.id)
+                                        .then(data => {
+                                            if (data.resultCode === 0) {
                                                 props.unfollowToUser(u.id)
                                             }
                                         })
                                 }}>Unfollow</button>
                                 : <button onClick={() => {
-                                    axios.post("https://social-network.samuraijs.com/api/1.0/follow/" + u.id, {}, {
-                                        withCredentials: true,
-                                        headers: {
-                                            "API-KEY": "8a3ca6c1-dfb0-48cf-8608-08d82687d761"
-                                        }
-                                    })
-                                        .then(response => {
-                                            console.log(response)
-                                            if (response.data.resultCode === 0) {
+                                    usersAPI.postFollow(u.id)
+                                        .then(data => {
+                                            console.log(data)
+                                            if (data.resultCode === 0) {
                                                 props.followToUser(u.id)
                                             }
                                         })
