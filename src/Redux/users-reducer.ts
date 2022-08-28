@@ -21,6 +21,7 @@ export type UsersPageType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+   followingProgress: Array<number>
 }
 
 export type FollowToUserActionCreatorType = ReturnType<typeof followToUser>
@@ -29,6 +30,7 @@ export type SetUsersActionCreatorType = ReturnType<typeof setUsers>
 export type SetCurrentPageActionCreatorType = ReturnType<typeof setCurrentPage>
 export type SetTotalUsersCounterActionCreatorType = ReturnType<typeof setTotalUsersCount>
 export type ToggleIsFetchingActionCreatorType = ReturnType<typeof toggleIsFetching>
+export type ToggleIsFollowingProgress = ReturnType<typeof toggleIsFollowingProgress>
 
 const FOLLOW_TO_USER = "FOLLOW-TO-USER"
 const UNFOLLOW_TO_USER = "UNFOLLOW-TO-USER"
@@ -36,6 +38,7 @@ const SET_USERS = "SET-USERS"
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE"
 const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE-IS-FOLLOWING-PROGRESS"
 
 
 let initialState: UsersPageType = {
@@ -43,7 +46,8 @@ let initialState: UsersPageType = {
     pageSize: 100,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingProgress: []
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {
@@ -60,6 +64,8 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionType): 
             return {...state, items: state.items.map(u => u.id === action.payload.userID ? {...u, followed: false} : u)}
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.payload.isFetching}
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {...state, followingProgress: action.payload.isFetching ? [...state.followingProgress, action.payload.userID] : state.followingProgress.filter(id => id !== action.payload.userID)}
         default:
             return state
     }
@@ -89,5 +95,10 @@ export const toggleIsFetching = (isFetching: boolean) => ({
     type: TOGGLE_IS_FETCHING,
     payload: {isFetching}
 }) as const
+export const toggleIsFollowingProgress = (userID:number, isFetching: boolean) => ({
+    type: TOGGLE_IS_FOLLOWING_PROGRESS,
+    payload: {userID, isFetching}
+}) as const
+
 
 export default usersReducer

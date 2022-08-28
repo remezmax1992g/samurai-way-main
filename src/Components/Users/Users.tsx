@@ -10,8 +10,10 @@ type UsersPropsType = {
     pageSize: number
     currentPage: number
     users: Array<UsersType>
+    followingProgress: Array<number>
     followToUser: (id: number) => void
     unfollowToUser: (id: number) => void
+    toggleIsFollowingProgress:(userID:number, isFetching: boolean) => void
     onClickChangePage: (page: number) => void
 }
 
@@ -42,21 +44,25 @@ const Users = (props: UsersPropsType) => {
                         </div>
                         <div>
                             {u.followed
-                                ? <button onClick={() => {
+                                ? <button disabled={props.followingProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleIsFollowingProgress(u.id, true)
                                     usersAPI.deleteFollow(u.id)
                                         .then(data => {
                                             if (data.resultCode === 0) {
                                                 props.unfollowToUser(u.id)
                                             }
+                                            props.toggleIsFollowingProgress(u.id, false)
                                         })
                                 }}>Unfollow</button>
-                                : <button onClick={() => {
+                                : <button disabled={props.followingProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleIsFollowingProgress(u.id, true)
                                     usersAPI.postFollow(u.id)
                                         .then(data => {
                                             console.log(data)
                                             if (data.resultCode === 0) {
                                                 props.followToUser(u.id)
                                             }
+                                            props.toggleIsFollowingProgress(u.id, false)
                                         })
                                 }}>Follow</button>}
                                 </div>
