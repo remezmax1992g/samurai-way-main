@@ -19,7 +19,7 @@ function App() {
                 <NavBar/>
                 <div className="app-wrapper-content">
                     <Route exact path="/Dialogs" render={() => <DialogsContainer/>}/>
-                    <Route exact path="/Profile/:userId?" render={() => <ProfileContainer />}/>
+                    <Route exact path="/Profile/:userId?" render={() => <ProfileContainer/>}/>
                     <Route exact path="/Users" render={() => <UsersContainer/>}/>
                     <Route exact path="/News" render={() => <News/>}/>
                     <Route exact path="/Music" render={() => <Music/>}/>
