@@ -1,4 +1,3 @@
-import {ActionType} from "./store";
 import {v1} from "uuid";
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
@@ -101,7 +100,7 @@ export const setProfile = (profile: ProfileType) => ({
     payload: {profile}
 }) as const
 //thunks
-export const setProfileServer = (userID: string) => (dispatch:Dispatch<ProfileActionType>) => {
+export const getProfile = (userID: string) => (dispatch:Dispatch<ProfileActionType>) => {
     if (!userID) {
         userID = "2"
     }

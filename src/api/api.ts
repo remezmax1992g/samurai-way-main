@@ -16,12 +16,6 @@ export const usersAPI = {
                 return response.data
             })
     },
-    getAuth(){
-        return  instance.get("auth/me")
-            .then(response => {
-                return response.data
-            })
-    },
     getProfile(userID: string){
         return instance.get(`profile/${userID}`)
             .then(response => {
@@ -37,6 +31,15 @@ export const usersAPI = {
     },
     postFollow(id: number){
         return instance.post(`follow/${id}`, {})
+            .then(response => {
+                return response.data
+            })
+    }
+}
+
+export const authAPI ={
+    getAuth(){
+        return  instance.get("auth/me")
             .then(response => {
                 return response.data
             })
