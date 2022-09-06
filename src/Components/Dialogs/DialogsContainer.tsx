@@ -8,9 +8,11 @@ import {
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
+import {HeaderStateType} from "../../Redux/auth-reducer";
 
 type MapStateToPropsForDialogsContainerType = {
     stateDialog:DialogsPageType
+    auth: HeaderStateType
 }
 
 type MapDispatchToPropsForDialogsContainerType = {
@@ -22,7 +24,8 @@ export type DialogsContainerPropsType = MapStateToPropsForDialogsContainerType &
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsForDialogsContainerType => {
     return {
-        stateDialog: state.dialogsPage
+        stateDialog: state.dialogsPage,
+        auth: state.auth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsForDialogsContainerType => {

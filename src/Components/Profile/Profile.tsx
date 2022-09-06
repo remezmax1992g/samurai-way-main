@@ -9,7 +9,6 @@ type ProfileLocalType = {
 }
 
 const Profile = (props: ProfileLocalType) => {
-
     return (
         <div className={classes.profile}>
             <ProfileInfo profile={props.profile}/>
