@@ -20,10 +20,10 @@ type MapStateToPropsForUsersContainerType = {
     followingProgress: Array<number>
 }
 type MapDispatchToPropsForUsersContainerType = {
-    follow: (userID: number) => any,
-    unfollow: (userID: number) => any,
-    getUsers: (currentPage: number, pageSize: number) => any
-    changePageOfUsers: (currentPage: number, pageSize: number) => any
+    follow: (userID: number) => void,
+    unfollow: (userID: number) => void,
+    getUsers: (currentPage: number, pageSize: number) => void
+    changePageOfUsers: (currentPage: number, pageSize: number) => void
 }
 export type UsersContainerType = MapDispatchToPropsForUsersContainerType & MapStateToPropsForUsersContainerType
 

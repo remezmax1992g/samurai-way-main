@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png";
-import {UsersType} from "../../Redux/users-reducer";
+import {UserActionType, UsersType} from "../../Redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import {Dispatch} from "redux";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -10,8 +11,8 @@ type UsersPropsType = {
     currentPage: number
     users: Array<UsersType>
     followingProgress: Array<number>
-    followToUser: (id: number) => any
-    unfollowToUser: (id: number) => any
+    followToUser: (id: number) => void
+    unfollowToUser: (id: number) => void
     onClickChangePage: (page: number) => void
 }
 

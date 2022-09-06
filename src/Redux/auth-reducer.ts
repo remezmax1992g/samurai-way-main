@@ -1,3 +1,6 @@
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+
 export type HeaderStateType = {
     id: number,
     email: string
@@ -31,4 +34,15 @@ export const setAuthUserData = (userID: number, email: string, login: string) =>
         type: SET_AUTH_USER_DATA,
         payload: {userID, email, login}
     } as const
+}
+
+export const setAuthUserDataServer = () => (dispatch: Dispatch<SetAuthUserDataType>) =>{
+    debugger
+    usersAPI.getAuth()
+        .then(data => {
+            if(data.resultCode === 0) {
+                let {id, email, login} = data.data
+                dispatch(setAuthUserData(id, email, login))
+            }
+        })
 }

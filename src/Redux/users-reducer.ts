@@ -1,5 +1,5 @@
-import {ActionType} from "./store";
 import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export type UsersType = {
     name: string
@@ -24,6 +24,16 @@ export type UsersPageType = {
     isFetching: boolean
     followingProgress: Array<number>
 }
+
+export type UserActionType =
+    FollowToUserActionCreatorType
+    | UnfollowToUserActionCreatorType
+    | SetUsersActionCreatorType
+    | SetCurrentPageActionCreatorType
+    | SetTotalUsersCounterActionCreatorType
+    | ToggleIsFetchingActionCreatorType
+    | ToggleIsFollowingProgress
+
 
 export type FollowToUserActionCreatorType = ReturnType<typeof followToUser>
 export type UnfollowToUserActionCreatorType = ReturnType<typeof unfollowToUser>
@@ -51,7 +61,7 @@ let initialState: UsersPageType = {
     followingProgress: []
 }
 
-const usersReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {
+const usersReducer = (state: UsersPageType = initialState, action: UserActionType): UsersPageType => {
     switch (action.type) {
         case SET_USERS:
             return {...state, items: action.payload.users}
@@ -104,7 +114,7 @@ export const toggleIsFollowingProgress = (userID: number, isFetching: boolean) =
     payload: {userID, isFetching}
 }) as const
 //thunks
-export const getUsers = (currentPage: number, pageSize: number) => (dispatch: any) => {
+export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch<UserActionType>) => {
     dispatch(toggleIsFetching(true))
     usersAPI.getUsers(currentPage, pageSize)
         .then(data => {
@@ -113,7 +123,7 @@ export const getUsers = (currentPage: number, pageSize: number) => (dispatch: an
             dispatch(setTotalUsersCount(data.totalCount))
         })
 }
-export const changePageOfUsers = (currentPage: number, pageSize: number) => (dispatch: any) => {
+export const changePageOfUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch<UserActionType>) => {
     dispatch(toggleIsFetching(true))
     dispatch(setCurrentPage(currentPage,))
     usersAPI.getUsers(currentPage, pageSize)
@@ -122,7 +132,7 @@ export const changePageOfUsers = (currentPage: number, pageSize: number) => (dis
             dispatch(setUsers(data.items))
         })
 }
-export const follow = (userID: number) => (dispatch: any) => {
+export const follow = (userID: number) => (dispatch: Dispatch<UserActionType>) => {
     dispatch(toggleIsFollowingProgress(userID, true))
     usersAPI.postFollow(userID)
         .then(data => {
@@ -132,7 +142,7 @@ export const follow = (userID: number) => (dispatch: any) => {
             dispatch(toggleIsFollowingProgress(userID, false))
         })
 }
-export const unfollow = (userID: number) => (dispatch: any) => {
+export const unfollow = (userID: number) => (dispatch: Dispatch<UserActionType>) => {
     dispatch(toggleIsFollowingProgress(userID, true))
     usersAPI.deleteFollow(userID)
         .then(data => {
