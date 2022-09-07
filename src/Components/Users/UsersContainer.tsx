@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {connect} from "react-redux";
 import {
     changePageOfUsers,
@@ -11,6 +11,7 @@ import {AppStateType} from "../../Redux/redux-store";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {WithAuthRedirect} from "../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 type MapStateToPropsForUsersContainerType = {
     users: Array<UsersType>
@@ -57,7 +58,6 @@ class UsersContainer extends React.Component<UsersContainerType> {
     }
 }
 
-
 let mapStateToProps = (state: AppStateType): MapStateToPropsForUsersContainerType => {
     return {
         users: state.userPage.items,
@@ -68,17 +68,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsForUsersContainerTyp
         followingProgress: state.userPage.followingProgress
     }
 }
-/*let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsForUsersContainerType => {
-    return {
-        followToUser: (userID: number) => dispatch(followToUserActionCreator(userID)),
-        unfollowToUser: (userID: number) => dispatch(unfollowToUserActionCreator(userID)),
-        setUsers: (users: Array<UsersType>) => dispatch(setUsersActionCreator(users)),
-        setCurrentPage: (currentPage: number) => dispatch(setCurrentPageActionCreator(currentPage)),
-        setTotalUsersCount: (totalCount: number) => dispatch(setTotalUsersCountActionCreator(totalCount)),
-        toggleIsFetching: (isFetching: boolean) => dispatch(toggleIsFetchingActionCreator(isFetching))
-    }
-}*/
 
-
-export default WithAuthRedirect(connect(mapStateToProps,
-    {follow, unfollow, getUsers, changePageOfUsers})(UsersContainer));
+export default compose<ComponentType>(
+    connect(mapStateToProps, {follow, unfollow, getUsers, changePageOfUsers}),
+    WithAuthRedirect)
+(UsersContainer)

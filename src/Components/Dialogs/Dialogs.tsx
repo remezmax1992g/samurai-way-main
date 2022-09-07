@@ -2,9 +2,15 @@ import React, {ChangeEvent} from 'react';
 import classes from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsContainerPropsType} from "./DialogsContainer";
+import {DialogsPageType} from "../../Redux/dialogs-reducer";
 
-const Dialogs = (props: DialogsContainerPropsType) => {
+type DialogLocalType ={
+    stateDialog:DialogsPageType
+    sendNewMessage: () => void,
+    updateMessageTextChange: (newMessageText: string) => void
+}
+
+const Dialogs = (props: DialogLocalType) => {
     //value
     let dialogElements = props.stateDialog.dialogData.map((d) => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     let messageElements = props.stateDialog.messagesData.map((m) => <Message key={m.id} message={m.message}/>)

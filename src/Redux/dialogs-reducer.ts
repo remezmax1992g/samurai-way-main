@@ -1,8 +1,8 @@
 import {ActionType} from "./store";
 import {v1} from "uuid";
 
-export type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextActionCreator>
-export type SendNewMessageActionType = ReturnType<typeof sendNewMessageActionCreator>
+export type UpdateMessageTextActionType = ReturnType<typeof updateMessageText>
+export type SendNewMessageActionType = ReturnType<typeof sendNewMessage>
 export type DialogsPageType = {
     dialogData: Array<DialogDataType>,
     messagesData: Array<MessagesDataType>,
@@ -55,10 +55,10 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionTyp
     }
 }
 
-export const updateMessageTextActionCreator = (newMessageText: string) => ({
+export const updateMessageText = (newMessageText: string) => ({
     type: UPDATE_MESSAGE_TEXT,
     payload: {newMessageText}
 }) as const
-export const sendNewMessageActionCreator = () => ({type: SEND_NEW_MESSAGE}) as const
+export const sendNewMessage = () => ({type: SEND_NEW_MESSAGE}) as const
 
 export default dialogsReducer
