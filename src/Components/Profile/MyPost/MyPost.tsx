@@ -5,8 +5,11 @@ import {MyPostContainerPropsType} from "./MyPostContainer";
 
 const MyPost = (props: MyPostContainerPropsType) => {
 
-        let postsElement = props.statePost.postsData.map((p) => <Post key={p.id} message={p.message}
-                                                                    likeCount={p.likeCount}/>)
+        let postsElement = props.statePost.postsData.map((p) =>
+            <div key = {p.id}>
+                <Post message={p.message}
+                      likeCount={p.likeCount}/>
+            </div>)
 
         let addPostClick = () => {
             props.addPost()
