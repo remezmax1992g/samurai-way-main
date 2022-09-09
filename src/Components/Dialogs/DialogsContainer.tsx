@@ -1,8 +1,9 @@
 import React, {ComponentType} from 'react';
 import Dialogs from "./Dialogs";
 import {
-    DialogsPageType, sendNewMessage,
-    updateMessageText,
+    DialogsPageType,
+    sendNewMessage,
+    updateMessageTextChange,
 } from "../../Redux/dialogs-reducer";
 import {connect} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
@@ -36,6 +37,6 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsForDialogsContainerT
 }
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, {sendNewMessage, updateMessageText}),
+    connect(mapStateToProps, {sendNewMessage, updateMessageTextChange}),
     WithAuthRedirect)
 (DialogsContainer);

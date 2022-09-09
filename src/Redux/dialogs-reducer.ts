@@ -1,7 +1,7 @@
 import {ActionType} from "./store";
 import {v1} from "uuid";
 
-export type UpdateMessageTextActionType = ReturnType<typeof updateMessageText>
+export type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextChange>
 export type SendNewMessageActionType = ReturnType<typeof sendNewMessage>
 export type DialogsPageType = {
     dialogData: Array<DialogDataType>,
@@ -41,6 +41,7 @@ let initialState = {
     newMessageText: ""
 }
 const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
+    debugger
     switch (action.type) {
         case SEND_NEW_MESSAGE:
             let newMessage: MessagesDataType = {
@@ -49,13 +50,14 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionTyp
             }
             return {...state, messagesData: [...state.messagesData, newMessage], newMessageText: ""}
         case UPDATE_MESSAGE_TEXT:
+            console.log(action.payload.newMessageText)
             return {...state, newMessageText: action.payload.newMessageText}
         default:
             return state
     }
 }
 
-export const updateMessageText = (newMessageText: string) => ({
+export const updateMessageTextChange = (newMessageText: string) => ({
     type: UPDATE_MESSAGE_TEXT,
     payload: {newMessageText}
 }) as const

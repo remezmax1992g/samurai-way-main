@@ -5,15 +5,18 @@ import {Dispatch} from "redux";
 export type AddPostActionCreatorType = ReturnType<typeof addPost>
 export type UpdateNewPostActionCreatorType = ReturnType<typeof updateNewPost>
 export type SetProfileActionCreatorType = ReturnType<typeof setProfile>
+export type EditStatusTextActionCreatorType = ReturnType<typeof editStatusText>
 export type ProfileActionType =
     AddPostActionCreatorType
     | UpdateNewPostActionCreatorType
     | SetProfileActionCreatorType
+    | EditStatusTextActionCreatorType
 
 export type ProfilePageType = {
     profile: ProfileType
     postsData: Array<PostsDataType>
     newPostText: string
+    newStatusText: string
 }
 export type PostsDataType = {
     id: string,
@@ -43,7 +46,8 @@ export type ProfileType = {
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST = "UPDATE-NEW-POST";
-const SET_PROFILE = "SET-PROFILE"
+const SET_PROFILE = "SET-PROFILE";
+const EDIT_STATUS_TEXT = "EDIT-STATUS-TEXT"
 
 let initialState: ProfilePageType = {
     profile: {
@@ -64,12 +68,14 @@ let initialState: ProfilePageType = {
         photos: {
             small: "",
             large: ""
-        }},
+        }
+    },
     postsData: [
         {id: v1(), message: "Hi, how are you?", likeCount: 11},
         {id: v1(), message: "It's my first post", likeCount: 12},
     ],
     newPostText: "",
+    newStatusText: "Hi"
 }
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionType): ProfilePageType => {
@@ -83,14 +89,20 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
             return {...state, postsData: [...state.postsData, newPost], newPostText: ""}
         case UPDATE_NEW_POST:
             return {...state, newPostText: action.payload.newPost}
+        case EDIT_STATUS_TEXT:
+            return {...state, newStatusText: action.payload.newStatusText}
         case SET_PROFILE:
-            return  {...state, profile: action.payload.profile}
+            return {...state, profile: action.payload.profile}
         default:
             return state
     }
 }
 //actionCreator
 export const addPost = () => ({type: ADD_POST}) as const
+export const editStatusText = (newStatusText: string) => ({
+    type: EDIT_STATUS_TEXT,
+    payload: {newStatusText}
+}) as const
 export const updateNewPost = (newPost: string) => ({
     type: UPDATE_NEW_POST,
     payload: {newPost}
@@ -100,7 +112,7 @@ export const setProfile = (profile: ProfileType) => ({
     payload: {profile}
 }) as const
 //thunks
-export const getProfile = (userID: string) => (dispatch:Dispatch<ProfileActionType>) => {
+export const getProfile = (userID: string) => (dispatch: Dispatch<ProfileActionType>) => {
     if (!userID) {
         userID = "2"
     }
