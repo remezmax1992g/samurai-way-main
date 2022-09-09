@@ -16,21 +16,35 @@ export const usersAPI = {
                 return response.data
             })
     },
+    deleteFollow(id: number){
+        return instance.delete(`follow/${id}`)
+            .then(response => {
+                return response.data
+            })
+    },
+    postFollow(id: number){
+        return instance.post(`follow/${id}`, {})
+            .then(response => {
+                return response.data
+            })
+    }
+}
+
+export const profileAPI = {
     getProfile(userID: string){
         return instance.get(`profile/${userID}`)
             .then(response => {
                 return response.data
             })
     },
-    deleteFollow(id: number){
-        return instance.delete(`follow/${id}`)
-            .then(response => {
-                return response.data
-            })
-
+    getStatus(userID: string){
+    return instance.get(`profile/status/${userID}`)
+        .then(response => {
+            return response.data
+        })
     },
-    postFollow(id: number){
-        return instance.post(`follow/${id}`, {})
+    putStatus(newStatusText: string){
+        return instance.put(`profile/status`, {status: newStatusText})
             .then(response => {
                 return response.data
             })

@@ -17,9 +17,6 @@ const ProfileInfo = (props: ProfileInfoType) => {
     }
     return (
         <div>
-            {/*<div>
-                <img className={classes.imgProfileInfo} src={myPhoto} alt="myPhoto"/>
-            </div>*/}
             <div className={classes.descriptionBlock}>
                 <div><img src={props.profile.photos.large} alt="no photo"/></div>
                 <div>{props.profile.fullName}</div>

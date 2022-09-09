@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {editStatusText} from "../../../../Redux/profile-reducer";
+import {updateStatus} from "../../../../Redux/profile-reducer";
 import {AppStateType} from "../../../../Redux/redux-store";
 import ProfileStatus from "./ProfileStatus";
 
@@ -14,6 +14,6 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsForMyProfileStatusCo
     }
 }
 
-const ProfileStatusContainer = connect(mapStateToProps, {editStatusText})(ProfileStatus)
+const ProfileStatusContainer = connect(mapStateToProps, {updateStatus})(ProfileStatus)
 
 export default ProfileStatusContainer;

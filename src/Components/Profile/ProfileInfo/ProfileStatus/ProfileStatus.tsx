@@ -2,21 +2,24 @@ import React, {ChangeEvent, Component} from 'react';
 
 type ProfileStatusPropsType = {
     newStatusText: string
-    editStatusText:(newStatusText: string) => void
+    updateStatus:(newStatusText: string) => void
 }
 
 class ProfileStatus extends Component<ProfileStatusPropsType> {
     state = {
-        editeMode: false
+        editeMode: false,
+        statusText: this.props.newStatusText
     }
-    activateEditMode(){
+    activateEditMode = () => {
         this.setState({editeMode: true})
     }
-    deactivateEditMode(){
+    deactivateEditMode = () => {
         this.setState({editeMode: false})
+        this.props.updateStatus(this.state.statusText)
+        this.setState({statusText: ""})
     }
     editStatusTextHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        this.props.editStatusText(event.currentTarget.value)
+       this.setState({statusText:event.currentTarget.value})
     }
     render() {
         return (
@@ -24,11 +27,11 @@ class ProfileStatus extends Component<ProfileStatusPropsType> {
                 {!this.state.editeMode
                 ?
                 <div>
-                    <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.newStatusText}</span>
+                    <span onDoubleClick={this.activateEditMode}>{this.props.newStatusText || "No status"}</span>
                 </div>
                 :
                 <div>
-                    <input type="text" value={this.props.newStatusText} onBlur={this.deactivateEditMode.bind(this)} onChange={this.editStatusTextHandler} autoFocus/>
+                    <input type="text" value={this.state.statusText} onBlur={this.deactivateEditMode} onChange={this.editStatusTextHandler} autoFocus/>
                 </div>}
             </div>
         );
