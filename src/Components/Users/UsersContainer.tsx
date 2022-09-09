@@ -4,8 +4,7 @@ import {
     changePageOfUsers,
     follow,
     getUsers,
-    unfollow,
-    UsersType
+    unfollow, UserType,
 } from "../../Redux/users-reducer";
 import {AppStateType} from "../../Redux/redux-store";
 import Users from "./Users";
@@ -14,7 +13,7 @@ import {WithAuthRedirect} from "../hoc/WithAuthRedirect";
 import {compose} from "redux";
 
 type MapStateToPropsForUsersContainerType = {
-    users: Array<UsersType>
+    users: Array<UserType>
     pageSize: number
     totalUsersCount: number
     currentPage: number

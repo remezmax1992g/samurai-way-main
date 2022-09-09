@@ -1,7 +1,7 @@
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 
-export type UsersType = {
+export type UserType = {
     name: string
     id: number
     photos: {
@@ -11,13 +11,9 @@ export type UsersType = {
     status: string,
     followed: boolean
 }
-type LocationType = {
-    city: string,
-    country: string
-}
 
 export type UsersPageType = {
-    items: Array<UsersType>
+    items: Array<UserType>
     pageSize: number
     totalUsersCount: number
     currentPage: number
@@ -93,7 +89,7 @@ export const unfollowToUser = (userID: number) => ({
     type: UNFOLLOW_TO_USER,
     payload: {userID}
 }) as const
-export const setUsers = (users: Array<UsersType>) => ({
+export const setUsers = (users: Array<UserType>) => ({
     type: SET_USERS,
     payload: {users}
 }) as const
