@@ -9,18 +9,18 @@ type UserPropsType = {
     followingProgress: Array<number>
     followToUser: (id: number) => void
     unfollowToUser: (id: number) => void
-    onClickChangePage: (page: number) => void
 }
 
 const User = (props: UserPropsType) => {
-    const changeStatusOfUser = props.user.followed
-            ? <button disabled={props.followingProgress.some(id => id === props.user.id)}
+    const {user, followingProgress, followToUser, unfollowToUser} = props
+    const changeStatusOfUser = user.followed
+            ? <button disabled={followingProgress.some(id => id === user.id)}
                       onClick={() => {
-                          props.unfollowToUser(props.user.id)
+                          unfollowToUser(user.id)
                       }}>Unfollow</button>
-            : <button disabled={props.followingProgress.some(id => id === props.user.id)}
+            : <button disabled={followingProgress.some(id => id === user.id)}
                       onClick={() => {
-                          props.followToUser(props.user.id)
+                          followToUser(user.id)
                       }}>Follow</button>
 
     return (
