@@ -10,6 +10,14 @@ class ProfileStatus extends Component<ProfileStatusPropsType> {
         editeMode: false,
         statusText: this.props.newStatusText
     }
+    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>) {
+        if(prevProps.newStatusText !== this.props.newStatusText){
+            this.setState({
+                statusText: this.props.newStatusText
+            })
+        }
+    }
+
     activateEditMode = () => {
         this.setState({editeMode: true})
     }
