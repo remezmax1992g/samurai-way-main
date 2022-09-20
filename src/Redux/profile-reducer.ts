@@ -3,12 +3,10 @@ import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 export type AddPostActionCreatorType = ReturnType<typeof addPost>
-export type UpdateNewPostActionCreatorType = ReturnType<typeof updateNewPost>
 export type SetProfileActionCreatorType = ReturnType<typeof setProfile>
 export type SetStatusTextActionCreatorType = ReturnType<typeof setStatusText>
 export type ProfileActionType =
     AddPostActionCreatorType
-    | UpdateNewPostActionCreatorType
     | SetProfileActionCreatorType
     | SetStatusTextActionCreatorType
 
@@ -45,7 +43,6 @@ export type ProfileType = {
 }
 
 const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST = "UPDATE-NEW-POST";
 const SET_PROFILE = "SET-PROFILE";
 const SET_STATUS_TEXT = "SET-STATUS-TEXT"
 
@@ -83,12 +80,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
         case ADD_POST:
             let newPost: PostsDataType = {
                 id: v1(),
-                message: state.newPostText,
+                message: action.payload.newPost,
                 likeCount: 0
             }
-            return {...state, postsData: [...state.postsData, newPost], newPostText: ""}
-        case UPDATE_NEW_POST:
-            return {...state, newPostText: action.payload.newPost}
+            return {...state, postsData: [...state.postsData, newPost]}
         case SET_STATUS_TEXT:
             return {...state, newStatusText: action.payload.newStatusText}
         case SET_PROFILE:
@@ -98,14 +93,12 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
     }
 }
 //actionCreator
-export const addPost = () => ({type: ADD_POST}) as const
+export const addPost = (newPost: string) => ({
+    type: ADD_POST,
+    payload:{newPost}}) as const
 export const setStatusText = (newStatusText:string) => ({
     type: SET_STATUS_TEXT,
     payload:{newStatusText}}) as const
-export const updateNewPost = (newPost: string) => ({
-    type: UPDATE_NEW_POST,
-    payload: {newPost}
-}) as const
 export const setProfile = (profile: ProfileType) => ({
     type: SET_PROFILE,
     payload: {profile}

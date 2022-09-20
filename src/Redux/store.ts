@@ -1,12 +1,11 @@
 import {
     AddPostActionCreatorType,
-    ProfilePageType, SetProfileActionCreatorType, UpdateNewPostActionCreatorType,
+    ProfilePageType, SetProfileActionCreatorType
 
 } from "./profile-reducer";
 import {
     DialogsPageType,
     SendNewMessageActionType,
-    UpdateMessageTextActionType
 } from "./dialogs-reducer";
 import {SidebarPageType} from "./sidebar-reducer";
 import {
@@ -24,8 +23,6 @@ export type RootStateType = {
 }
 export type ActionType =
     AddPostActionCreatorType
-    | UpdateNewPostActionCreatorType
-    | UpdateMessageTextActionType
     | SendNewMessageActionType
     | FollowToUserActionCreatorType
     | UnfollowToUserActionCreatorType

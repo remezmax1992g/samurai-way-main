@@ -1,7 +1,8 @@
-import React, {ChangeEvent, KeyboardEvent} from 'react';
+import React from 'react';
 import classes from ".//MyPost.module.css";
 import Post from "./Post/Post";
 import {MyPostContainerPropsType} from "./MyPostContainer";
+import {AddPostReduxForm} from "./AddPostForm/AddPostReduxForm";
 
 const MyPost = (props: MyPostContainerPropsType) => {
 
@@ -11,32 +12,22 @@ const MyPost = (props: MyPostContainerPropsType) => {
                       likeCount={p.likeCount}/>
             </div>)
 
-        let addPostClick = () => {
-            props.addPost()
+        let addNewPostHandler = (values: any) => {
+            props.addPost(values.newPostBody)
         }
 
-        let addPostKeyboardClick = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-            if (event.key === "Enter" && event.ctrlKey) {
-                props.addPost()
-            }
-        }
-
-        let onChangeNewPostHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-            let newPost = event.currentTarget.value
-            props.updateNewPost(newPost)
-        }
+        // let addPostKeyboardClick = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+        //     if (event.key === "Enter" && event.ctrlKey) {
+        //         props.addPost()
+        //     }
+        // }
 
         return (
             <div className={classes.postBlock}>
                 <div>
                     <h2>My posts</h2>
                 </div>
-                <div><textarea onChange={onChangeNewPostHandler}
-                               value={props.statePost.newPostText}
-                               onKeyDown={addPostKeyboardClick}></textarea></div>
-                <div>
-                    <button onClick={addPostClick}>Add post</button>
-                </div>
+               <AddPostReduxForm onSubmit={addNewPostHandler}/>
                 <div className={classes.posts}>
                     {postsElement}
                 </div>
