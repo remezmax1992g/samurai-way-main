@@ -22,22 +22,13 @@ export type UsersPageType = {
 }
 
 export type UserActionType =
-    FollowToUserActionCreatorType
-    | UnfollowToUserActionCreatorType
-    | SetUsersActionCreatorType
-    | SetCurrentPageActionCreatorType
-    | SetTotalUsersCounterActionCreatorType
-    | ToggleIsFetchingActionCreatorType
-    | ToggleIsFollowingProgress
-
-
-export type FollowToUserActionCreatorType = ReturnType<typeof followToUser>
-export type UnfollowToUserActionCreatorType = ReturnType<typeof unfollowToUser>
-export type SetUsersActionCreatorType = ReturnType<typeof setUsers>
-export type SetCurrentPageActionCreatorType = ReturnType<typeof setCurrentPage>
-export type SetTotalUsersCounterActionCreatorType = ReturnType<typeof setTotalUsersCount>
-export type ToggleIsFetchingActionCreatorType = ReturnType<typeof toggleIsFetching>
-export type ToggleIsFollowingProgress = ReturnType<typeof toggleIsFollowingProgress>
+    | ReturnType<typeof followToUser>
+    | ReturnType<typeof unfollowToUser>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof toggleIsFollowingProgress>
 
 const FOLLOW_TO_USER = "FOLLOW-TO-USER"
 const UNFOLLOW_TO_USER = "UNFOLLOW-TO-USER"

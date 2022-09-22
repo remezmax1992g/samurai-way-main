@@ -2,13 +2,10 @@ import {v1} from "uuid";
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 
-export type AddPostActionCreatorType = ReturnType<typeof addPost>
-export type SetProfileActionCreatorType = ReturnType<typeof setProfile>
-export type SetStatusTextActionCreatorType = ReturnType<typeof setStatusText>
 export type ProfileActionType =
-    AddPostActionCreatorType
-    | SetProfileActionCreatorType
-    | SetStatusTextActionCreatorType
+    | ReturnType<typeof addPost>
+    | ReturnType<typeof setProfile>
+    | ReturnType<typeof setStatusText>
 
 export type ProfilePageType = {
     profile: ProfileType

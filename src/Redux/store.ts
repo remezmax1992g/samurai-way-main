@@ -1,47 +1,4 @@
-import {
-    AddPostActionCreatorType,
-    ProfilePageType, SetProfileActionCreatorType
-
-} from "./profile-reducer";
-import {
-    DialogsPageType,
-    SendNewMessageActionType,
-} from "./dialogs-reducer";
-import {SidebarPageType} from "./sidebar-reducer";
-import {
-    FollowToUserActionCreatorType, SetCurrentPageActionCreatorType, SetTotalUsersCounterActionCreatorType,
-    SetUsersActionCreatorType, ToggleIsFetchingActionCreatorType, ToggleIsFollowingProgress,
-    UnfollowToUserActionCreatorType, UsersPageType
-} from "./users-reducer";
-
-//type
-export type RootStateType = {
-    profilePage: ProfilePageType,
-    dialogsPage: DialogsPageType,
-    sidebarPage: SidebarPageType
-    userPage: UsersPageType
-}
-export type ActionType =
-    AddPostActionCreatorType
-    | SendNewMessageActionType
-    | FollowToUserActionCreatorType
-    | UnfollowToUserActionCreatorType
-    | SetUsersActionCreatorType
-    | SetCurrentPageActionCreatorType
-    | SetTotalUsersCounterActionCreatorType
-    | ToggleIsFetchingActionCreatorType
-    | SetProfileActionCreatorType
-    | ToggleIsFollowingProgress
-export type StoreType = {
-    //state
-    _state: RootStateType
-    getState: () => RootStateType
-    setState: (state: RootStateType) => void
-    //function
-    _callSubscriber: () => void
-    subscribe: (observer: () => void) => void
-    dispatch: (action: ActionType) => void
-}
+export type StoreType = null
 //store
 /*
 const store: StoreType = {

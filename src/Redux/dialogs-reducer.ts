@@ -1,7 +1,6 @@
-import {ActionType} from "./store";
 import {v1} from "uuid";
 
-export type SendNewMessageActionType = ReturnType<typeof sendNewMessage>
+export type DialogsActionType = ReturnType<typeof sendNewMessage>
 export type DialogsPageType = {
     dialogData: Array<DialogDataType>,
     messagesData: Array<MessagesDataType>,
@@ -36,7 +35,7 @@ let initialState = {
         {id: v1(), name: "Artur"}
     ],
 }
-const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
+const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionType): DialogsPageType => {
     switch (action.type) {
         case SEND_NEW_MESSAGE:
             let newMessage: MessagesDataType = {

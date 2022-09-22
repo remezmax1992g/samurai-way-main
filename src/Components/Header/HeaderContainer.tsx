@@ -6,7 +6,7 @@ import {getAuthUserData} from "../../Redux/auth-reducer";
 
 type MapStateToPropsForHeaderContainerType = {
     isAuth: boolean
-    login: string
+    login: string | null
 }
 type MapDispatchToPropsForHeaderContainerType = {
     getAuthUserData:() => void

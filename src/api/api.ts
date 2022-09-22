@@ -16,13 +16,13 @@ export const usersAPI = {
                 return response.data
             })
     },
-    deleteFollow(id: number){
+    deleteFollow(id: number) {
         return instance.delete(`follow/${id}`)
             .then(response => {
                 return response.data
             })
     },
-    postFollow(id: number){
+    postFollow(id: number) {
         return instance.post(`follow/${id}`, {})
             .then(response => {
                 return response.data
@@ -31,19 +31,19 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    getProfile(userID: string){
+    getProfile(userID: string) {
         return instance.get(`profile/${userID}`)
             .then(response => {
                 return response.data
             })
     },
-    getStatus(userID: string){
-    return instance.get(`profile/status/${userID}`)
-        .then(response => {
-            return response.data
-        })
+    getStatus(userID: string) {
+        return instance.get(`profile/status/${userID}`)
+            .then(response => {
+                return response.data
+            })
     },
-    putStatus(newStatusText: string){
+    putStatus(newStatusText: string) {
         return instance.put(`profile/status`, {status: newStatusText})
             .then(response => {
                 return response.data
@@ -51,9 +51,21 @@ export const profileAPI = {
     }
 }
 
-export const authAPI ={
-    getAuth(){
-        return  instance.get("auth/me")
+export const authAPI = {
+    getAuth() {
+        return instance.get("auth/me")
+            .then(response => {
+                return response.data
+            })
+    },
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post("auth/login", {email, password, rememberMe})
+            .then(response => {
+                return response.data
+            })
+    },
+    logout() {
+        return instance.delete("auth/login")
             .then(response => {
                 return response.data
             })
