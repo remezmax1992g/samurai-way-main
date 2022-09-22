@@ -103,7 +103,7 @@ export const setProfile = (profile: ProfileType) => ({
 //thunks
 export const getProfile = (userID: string) => (dispatch: Dispatch<ProfileActionType>) => {
     if (!userID) {
-        userID = "2"
+        userID = "25436"
     }
     profileAPI.getProfile(userID)
         .then(data => {

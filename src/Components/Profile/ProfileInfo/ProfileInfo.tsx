@@ -18,7 +18,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
     return (
         <div>
             <div className={classes.descriptionBlock}>
-                <div><img src={props.profile.photos.large} alt="no photo"/></div>
+                <div><img src={props.profile.photos.large} alt="myPhoto"/></div>
                 <div>{props.profile.fullName}</div>
                 <ProfileStatusContainer/>
                 <h3>Description</h3>
