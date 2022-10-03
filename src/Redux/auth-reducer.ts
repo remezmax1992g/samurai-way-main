@@ -1,4 +1,4 @@
-import {authAPI} from "../api/api";
+import {authAPI, LoginParamsType} from "../api/api";
 import {Dispatch} from "redux";
 import {AppThunk} from "./redux-store";
 
@@ -45,15 +45,15 @@ export const getAuthUserData = () => (dispatch: Dispatch<AuthActionType>) => {
             }
         })
 }
-export const createLogin = (email: string, password: string, rememberMe: boolean): AppThunk => async dispatch => {
-    const data = await authAPI.login(email, password, rememberMe)
-    if (data.resultCode === 0) {
+export const createLogin = (data: LoginParamsType): AppThunk => async dispatch => {
+    const res = await authAPI.login(data)
+    if (res.resultCode === 0) {
         dispatch(getAuthUserData())
     }
 }
 export const deleteLogin = (): AppThunk => async dispatch => {
-    const data = await authAPI.logout()
-    if (data.resultCode === 0) {
+    const res = await authAPI.logout()
+    if (res.resultCode === 0) {
         dispatch(setAuthUserData(null, null, null, false))
     }
 }

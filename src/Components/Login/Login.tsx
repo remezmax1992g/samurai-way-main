@@ -1,37 +1,67 @@
 import React from 'react';
-import {LoginReduxForm} from "./LoginForm/LoginReduxForm";
-import {FormDataType} from "./LoginForm/LoginForm";
-import {createLogin} from "../../Redux/auth-reducer";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../Redux/redux-store";
+import {createLogin} from "../../Redux/auth-reducer";
+import {useFormik} from "formik";
 import {Redirect} from "react-router-dom";
-type MapDispatchToPropsForLoginType = {
-    createLogin: (email: string, password: string, rememberMe: boolean) => void
-}
-type MapStateToPropsForLoginType = {
-    isAuth: boolean
-}
-type LoginType = MapStateToPropsForLoginType & MapDispatchToPropsForLoginType
 
-const Login = (props: LoginType) => {
-    const onSubmit = (formData: FormDataType) =>{
-       props.createLogin(formData.email, formData.password, formData.rememberMe)
-    }
-    if(props.isAuth){
+const Login = () => {
+    const dispatch = useDispatch()
+    const isLogin = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            password: "",
+            rememberMe: false
+        },
+        onSubmit: values => {
+            dispatch(createLogin(values))
+        },
+        validate: values => {
+            if (!values.email) {
+                return {email: "Email is required"}
+            }
+            if (!values.password) {
+                return {password: "Password is required"}
+            }
+        }
+    })
+    if (isLogin) {
         return <Redirect to={"/Profile"}/>
     }
-    else {
-        return (
+    return( <form onSubmit={formik.handleSubmit}>
             <div>
-                <h1>Login</h1>
-                <LoginReduxForm onSubmit={onSubmit}/>
+                <input type="email"
+                       name="email"
+                       placeholder="Email"
+                       onChange={formik.handleChange}
+                       value={formik.values.email}
+                />
             </div>
-        );
-    }
-};
-const mapStateToProps = (state: AppStateType) =>{
-    return{
-        isAuth: state.auth.isAuth
-    }
+            {formik.errors.email ? formik.errors.email : null}
+            <div>
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                />
+            </div>
+            {formik.errors.password ? formik.errors.password : null}
+            <div>
+                <input
+                    type="checkbox"
+                    name="rememberMe"
+                    placeholder="Remember me"
+                    checked={formik.values.rememberMe}
+                    onChange={formik.handleChange}
+                />
+                Remember me
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    )
 }
-export default connect(mapStateToProps, {createLogin})(Login);
+
+export default Login;

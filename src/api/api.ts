@@ -58,8 +58,8 @@ export const authAPI = {
                 return response.data
             })
     },
-    login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post("auth/login", {email, password, rememberMe})
+    login(data: LoginParamsType) {
+        return instance.post("auth/login", data)
             .then(response => {
                 return response.data
             })
@@ -70,4 +70,10 @@ export const authAPI = {
                 return response.data
             })
     }
+}
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: string
 }
