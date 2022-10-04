@@ -19,10 +19,10 @@ const Login = () => {
         },
         validate: values => {
             if (!values.email) {
-                return {email: "Email is required"}
+                return  {email: "Email is required"}
             }
             if (!values.password) {
-                return {password: "Password is required"}
+               return {password: "Password is required"}
             }
         }
     })
@@ -38,7 +38,7 @@ const Login = () => {
                        value={formik.values.email}
                 />
             </div>
-            {formik.errors.email ? formik.errors.email : null}
+            {formik.errors.email ? <div>{formik.errors.email}</div> : null}
             <div>
                 <input
                     type="password"
@@ -48,16 +48,15 @@ const Login = () => {
                     value={formik.values.password}
                 />
             </div>
-            {formik.errors.password ? formik.errors.password : null}
+            {formik.errors.password ? <div>{formik.errors.password}</div> : null}
             <div>
                 <input
                     type="checkbox"
                     name="rememberMe"
-                    placeholder="Remember me"
                     checked={formik.values.rememberMe}
                     onChange={formik.handleChange}
                 />
-                Remember me
+                <span>Remember me</span>
             </div>
             <button type="submit">Login</button>
         </form>

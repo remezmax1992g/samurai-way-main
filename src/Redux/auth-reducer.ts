@@ -3,7 +3,7 @@ import {Dispatch} from "redux";
 import {AppThunk} from "./redux-store";
 
 export type HeaderStateType = {
-    id: number | null,
+    userID: number | null,
     email: string | null
     login: string | null
     isAuth: boolean
@@ -13,7 +13,7 @@ export type AuthActionType = ReturnType<typeof setAuthUserData>
 const SET_AUTH_USER_DATA = "SET-AUTH-USER-DATA"
 
 let initialState: HeaderStateType = {
-    id: null,
+    userID: null,
     email: null,
     login: null,
     isAuth: false,

@@ -27,8 +27,9 @@ class ProfileContainer extends React.Component<CommonProfileContainerPropsType> 
     }
 
     componentDidMount() {
-        this.props.getProfile(this.props.match.params.userId)
-        this.props.getStatus(this.props.match.params.userId)
+        let userID = this.props.match.params.userId
+        this.props.getProfile(userID)
+        this.props.getStatus(userID)
     }
 
     render() {
@@ -38,7 +39,7 @@ class ProfileContainer extends React.Component<CommonProfileContainerPropsType> 
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsForProfileContainerType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
     }
 }
 export default compose<ComponentType>(connect(mapStateToProps, {getProfile, getStatus}),withRouter,WithAuthRedirect)(ProfileContainer)
