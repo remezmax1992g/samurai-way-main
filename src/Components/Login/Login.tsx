@@ -1,13 +1,13 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../Redux/redux-store";
 import {createLogin} from "../../Redux/auth-reducer";
 import {useFormik} from "formik";
 import {Redirect} from "react-router-dom";
+import {RootStateType} from "../../Redux/redux-store";
 
 const Login = () => {
     const dispatch = useDispatch()
-    const isLogin = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
+    const isLogin = useSelector<RootStateType, boolean>(state => state.auth.isAuth)
     const formik = useFormik({
         initialValues: {
             email: "",

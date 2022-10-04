@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import './App.css';
 import NavBar from "./Components/NavBar/NavBar";
-import {Route} from "react-router-dom";
+import {Route, RouteComponentProps, withRouter} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
@@ -10,11 +10,27 @@ import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
+import {compose} from "redux";
+import {connect} from "react-redux";
+import {initializing} from "./Redux/app-reducer";
+import {RootStateType} from "./Redux/redux-store";
+import Preloader from "./Components/common/Preloader/Preloader";
 
+type MapStateToPropsForAppType = {
+    isInitialized: boolean
+}
+type MapDispatchToPropsForAppType = {
+    initializing:() => void
+}
+type AppType = MapStateToPropsForAppType & MapDispatchToPropsForAppType & RouteComponentProps
 
-function App() {
-
-    return (
+class App extends React.Component<AppType> {
+    componentDidMount() {
+        this.props.initializing()
+    }
+    render() {
+        if(!this.props.isInitialized) return <Preloader/>
+        return (
             <div className="app-wrapper">
                 <HeaderContainer/>
                 <NavBar/>
@@ -28,7 +44,13 @@ function App() {
                     <Route exact path="/Login" render={() => <Login/>}/>
                 </div>
             </div>
-    );
+        );
+    }
+}
+let mapStateToProps = (state: RootStateType): MapStateToPropsForAppType => {
+    return {
+        isInitialized: state.app.isInitialized
+    }
 }
 
-export default App;
+export default compose<ComponentType>(connect(mapStateToProps, {initializing}), withRouter)(App);

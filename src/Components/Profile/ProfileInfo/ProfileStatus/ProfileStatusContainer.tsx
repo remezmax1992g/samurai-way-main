@@ -1,14 +1,14 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {updateStatus} from "../../../../Redux/profile-reducer";
-import {AppStateType} from "../../../../Redux/redux-store";
 import ProfileStatus from "./ProfileStatus";
+import {RootStateType} from "../../../../Redux/redux-store";
 
 type MapStateToPropsForMyProfileStatusContainerType = {
     newStatusText: string
 }
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsForMyProfileStatusContainerType => {
+let mapStateToProps = (state: RootStateType): MapStateToPropsForMyProfileStatusContainerType => {
     return {
         newStatusText: state.profilePage.newStatusText
     }

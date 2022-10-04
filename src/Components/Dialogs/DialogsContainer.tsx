@@ -5,9 +5,9 @@ import {
     sendNewMessage,
 } from "../../Redux/dialogs-reducer";
 import {connect} from "react-redux";
-import {AppStateType} from "../../Redux/redux-store";
 import {compose} from "redux";
 import {WithAuthRedirect} from "../hoc/WithAuthRedirect";
+import {RootStateType} from "../../Redux/redux-store";
 
 type MapStateToPropsForDialogsContainerType = {
     stateDialog:DialogsPageType
@@ -28,7 +28,7 @@ class DialogsContainer extends React.Component<DialogsContainerPropsType> {
                        />
     }
 }
-let mapStateToProps = (state: AppStateType): MapStateToPropsForDialogsContainerType => {
+let mapStateToProps = (state: RootStateType): MapStateToPropsForDialogsContainerType => {
     return {
         stateDialog: state.dialogsPage,
     }

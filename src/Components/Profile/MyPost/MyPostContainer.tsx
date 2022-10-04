@@ -2,7 +2,7 @@ import React from 'react';
 import MyPost from "./MyPost";
 import {addPost, ProfilePageType} from "../../../Redux/profile-reducer";
 import {connect} from "react-redux";
-import {AppStateType} from "../../../Redux/redux-store";
+import {RootStateType} from "../../../Redux/redux-store";
 
 type MapStateToPropsForMyPostContainerType = {
     statePost: ProfilePageType
@@ -14,7 +14,7 @@ type MapDispatchToPropsForMyPostContainerType = {
 
 export type MyPostContainerPropsType = MapStateToPropsForMyPostContainerType & MapDispatchToPropsForMyPostContainerType
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsForMyPostContainerType => {
+let mapStateToProps = (state: RootStateType): MapStateToPropsForMyPostContainerType => {
     return {
         statePost: state.profilePage
     }

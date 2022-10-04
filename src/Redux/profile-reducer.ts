@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
-import {AppStateType} from "./redux-store";
+import {RootStateType} from "./redux-store";
 
 export type ProfileActionType =
     | ReturnType<typeof addPost>
@@ -102,7 +102,7 @@ export const setProfile = (profile: ProfileType) => ({
     payload: {profile}
 }) as const
 //thunks
-export const getProfile = (userID: string) => (dispatch: Dispatch<ProfileActionType>, getState: () => AppStateType) => {
+export const getProfile = (userID: string) => (dispatch: Dispatch<ProfileActionType>, getState: () => RootStateType) => {
     if (!userID) {
         userID = JSON.stringify(getState().auth.userID)
     }
@@ -111,7 +111,7 @@ export const getProfile = (userID: string) => (dispatch: Dispatch<ProfileActionT
             dispatch(setProfile(data))
         })
 }
-export const getStatus = (userID: string) => (dispatch: Dispatch<ProfileActionType>, getState: () => AppStateType) => {
+export const getStatus = (userID: string) => (dispatch: Dispatch<ProfileActionType>, getState: () => RootStateType) => {
     if (!userID) {
         userID = JSON.stringify(getState().auth.userID)
     }
