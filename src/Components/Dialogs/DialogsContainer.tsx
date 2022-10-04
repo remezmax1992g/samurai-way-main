@@ -3,7 +3,7 @@ import Dialogs from "./Dialogs";
 import {
     DialogsPageType,
     sendNewMessage,
-} from "../../Redux/dialogs-reducer";
+} from "../../Redux/reducers/dialogs-reducer";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {WithAuthRedirect} from "../hoc/WithAuthRedirect";

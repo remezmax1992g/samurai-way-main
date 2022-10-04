@@ -1,6 +1,6 @@
-import {authAPI, LoginParamsType} from "../api/api";
+import {authAPI, LoginParamsType} from "../../api/api";
 import {Dispatch} from "redux";
-import {AppThunk} from "./redux-store";
+import {AppThunk} from "../redux-store";
 
 export type HeaderStateType = {
     userID: number | null,

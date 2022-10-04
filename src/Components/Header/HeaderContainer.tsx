@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
-import {deleteLogin} from "../../Redux/auth-reducer";
+import {deleteLogin} from "../../Redux/reducers/auth-reducer";
 import {RootStateType} from "../../Redux/redux-store";
 
 type MapStateToPropsForHeaderContainerType = {

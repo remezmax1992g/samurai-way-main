@@ -1,5 +1,5 @@
 import React from 'react';
-import {UserType} from "../../Redux/users-reducer";
+import {UserType} from "../../Redux/reducers/users-reducer";
 import User from "./User/User";
 import PagesOfUsers from "./PagesOfUsers/PagesOfUsers";
 

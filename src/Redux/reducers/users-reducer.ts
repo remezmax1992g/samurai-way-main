@@ -1,4 +1,4 @@
-import {usersAPI} from "../api/api";
+import {usersAPI} from "../../api/api";
 import {Dispatch} from "redux";
 
 export type UserType = {
@@ -101,7 +101,7 @@ export const toggleIsFollowingProgress = (userID: number, isFetching: boolean) =
     payload: {userID, isFetching}
 }) as const
 //thunks
-export const getUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch<UserActionType>) => {
+export const requestUsers = (currentPage: number, pageSize: number) => (dispatch: Dispatch<UserActionType>) => {
     dispatch(toggleIsFetching(true))
     usersAPI.getUsers(currentPage, pageSize)
         .then(data => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {updateStatus} from "../../../../Redux/profile-reducer";
+import {updateStatus} from "../../../../Redux/reducers/profile-reducer";
 import ProfileStatus from "./ProfileStatus";
 import {RootStateType} from "../../../../Redux/redux-store";
 

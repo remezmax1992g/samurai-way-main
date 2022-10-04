@@ -1,6 +1,6 @@
 import React, {ComponentType} from "react"
 import Profile from "./Profile";
-import {getProfile, getStatus, ProfileType} from "../../Redux/profile-reducer";
+import {getProfile, getStatus, ProfileType} from "../../Redux/reducers/profile-reducer";
 import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../hoc/WithAuthRedirect";

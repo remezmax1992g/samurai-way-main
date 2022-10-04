@@ -1,7 +1,7 @@
 import {v1} from "uuid";
-import {profileAPI} from "../api/api";
+import {profileAPI} from "../../api/api";
 import {Dispatch} from "redux";
-import {RootStateType} from "./redux-store";
+import {RootStateType} from "../redux-store";
 
 export type ProfileActionType =
     | ReturnType<typeof addPost>

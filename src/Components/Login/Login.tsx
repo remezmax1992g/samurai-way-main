@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {createLogin} from "../../Redux/auth-reducer";
+import {createLogin} from "../../Redux/reducers/auth-reducer";
 import {useFormik} from "formik";
 import {Redirect} from "react-router-dom";
 import {RootStateType} from "../../Redux/redux-store";
