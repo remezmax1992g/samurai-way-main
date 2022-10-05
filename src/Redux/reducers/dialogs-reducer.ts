@@ -15,7 +15,7 @@ export type DialogDataType = {
 }
 
 
-const SEND_NEW_MESSAGE = "SEND-NEW-MESSAGE";
+const SEND_NEW_MESSAGE = "dialogs/SEND-NEW-MESSAGE";
 let initialState = {
     messagesData: [
         {id: v1(), message: "Hi"},

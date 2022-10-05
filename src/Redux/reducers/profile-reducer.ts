@@ -1,7 +1,6 @@
 import {v1} from "uuid";
 import {profileAPI} from "../../api/api";
-import {Dispatch} from "redux";
-import {RootStateType} from "../redux-store";
+import {AppThunk} from "../redux-store";
 
 export type ProfileActionType =
     | ReturnType<typeof addPost>
@@ -39,9 +38,9 @@ export type ProfileType = {
     }
 }
 
-const ADD_POST = "ADD-POST";
-const SET_PROFILE = "SET-PROFILE";
-const SET_STATUS_TEXT = "SET-STATUS-TEXT"
+const ADD_POST = "profile/ADD-POST";
+const SET_PROFILE = "profile/SET-PROFILE";
+const SET_STATUS_TEXT = "profile/SET-STATUS-TEXT"
 
 let initialState: ProfilePageType = {
     profile: {
@@ -68,7 +67,7 @@ let initialState: ProfilePageType = {
         {id: v1(), message: "Hi, how are you?", likeCount: 11},
         {id: v1(), message: "It's my first post", likeCount: 12},
     ],
-    newStatusText: "Hi"
+    newStatusText: ""
 }
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionType): ProfilePageType => {
@@ -91,38 +90,37 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileAc
 //actionCreator
 export const addPost = (newPost: string) => ({
     type: ADD_POST,
-    payload:{newPost}}) as const
-export const setStatusText = (newStatusText:string) => ({
+    payload: {newPost}
+}) as const
+export const setStatusText = (newStatusText: string) => ({
     type: SET_STATUS_TEXT,
-    payload:{newStatusText}}) as const
+    payload: {newStatusText}
+}) as const
 export const setProfile = (profile: ProfileType) => ({
     type: SET_PROFILE,
     payload: {profile}
 }) as const
-//thunks
-export const getProfile = (userID: string) => (dispatch: Dispatch<ProfileActionType>, getState: () => RootStateType) => {
+//thunkCreators
+export const getProfile = (userID: string): AppThunk => async (dispatch, getState) => {
     if (!userID) {
         userID = JSON.stringify(getState().auth.userID)
     }
-    profileAPI.getProfile(userID)
-        .then(data => {
-            dispatch(setProfile(data))
-        })
+    const res = await profileAPI.getProfile(userID)
+    dispatch(setProfile(res))
+
 }
-export const getStatus = (userID: string) => (dispatch: Dispatch<ProfileActionType>, getState: () => RootStateType) => {
+export const getStatus = (userID: string): AppThunk => async (dispatch, getState) => {
     if (!userID) {
         userID = JSON.stringify(getState().auth.userID)
     }
-    profileAPI.getStatus(userID)
-        .then(statusText => dispatch(setStatusText(statusText)))
+    const res = await profileAPI.getStatus(userID)
+    dispatch(setStatusText(res))
 }
-export const updateStatus = (newStatusText: string) => (dispatch: Dispatch<ProfileActionType>) => {
-    profileAPI.putStatus(newStatusText)
-        .then(data => {
-            if(data.resultCode === 0){
-                dispatch(setStatusText(newStatusText))
-            }
-        })
+export const updateStatus = (newStatusText: string): AppThunk => async dispatch => {
+    const res = await profileAPI.putStatus(newStatusText)
+    if (res.resultCode === 0) {
+        dispatch(setStatusText(newStatusText))
+    }
 }
 
 export default profileReducer
