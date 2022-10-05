@@ -1,6 +1,6 @@
 import {usersAPI} from "../../api/api";
-import {Dispatch} from "redux";
 import {AppDispatch, AppThunk} from "../redux-store";
+import {updateObjInArray} from "../../utilits/helper/helper";
 
 export type UserType = {
     name: string
@@ -49,7 +49,7 @@ let initialState: UsersPageType = {
     followingProgress: []
 }
 
-const usersReducer = (state: UsersPageType = initialState, action: UserActionType): UsersPageType => {
+export const usersReducer = (state: UsersPageType = initialState, action: UserActionType): UsersPageType => {
     switch (action.type) {
         case SET_USERS:
             return {...state, items: action.payload.users}
@@ -58,9 +58,9 @@ const usersReducer = (state: UsersPageType = initialState, action: UserActionTyp
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUsersCount: action.payload.totalCount}
         case FOLLOW_TO_USER:
-            return {...state, items: state.items.map(u => u.id === action.payload.userID ? {...u, followed: true} : u)}
+            return {...state, items: updateObjInArray(state.items, action.payload.userID, {followed: true})}
         case UNFOLLOW_TO_USER:
-            return {...state, items: state.items.map(u => u.id === action.payload.userID ? {...u, followed: false} : u)}
+            return {...state, items: updateObjInArray(state.items, action.payload.userID, {followed: false})}
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.payload.isFetching}
         case TOGGLE_IS_FOLLOWING_PROGRESS:
@@ -131,5 +131,3 @@ export const follow = (userID: number): AppThunk => async dispatch => {
 export const unfollow = (userID: number): AppThunk => async dispatch => {
     flowFollowAndUnfollow(dispatch, userID, usersAPI.deleteFollow.bind(usersAPI), unfollowToUser)
 }
-
-export default usersReducer

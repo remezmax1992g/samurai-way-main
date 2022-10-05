@@ -35,7 +35,7 @@ let initialState = {
         {id: v1(), name: "Artur"}
     ],
 }
-const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionType): DialogsPageType => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionType): DialogsPageType => {
     switch (action.type) {
         case SEND_NEW_MESSAGE:
             let newMessage: MessagesDataType = {
@@ -51,5 +51,3 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsAc
 export const sendNewMessage = (newTextMessage: string) => ({
     type: SEND_NEW_MESSAGE,
     payload: {newTextMessage}}) as const
-
-export default dialogsReducer

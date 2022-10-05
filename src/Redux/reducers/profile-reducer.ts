@@ -70,7 +70,7 @@ let initialState: ProfilePageType = {
     newStatusText: ""
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionType): ProfilePageType => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             let newPost: PostsDataType = {
@@ -122,5 +122,3 @@ export const updateStatus = (newStatusText: string): AppThunk => async dispatch 
         dispatch(setStatusText(newStatusText))
     }
 }
-
-export default profileReducer

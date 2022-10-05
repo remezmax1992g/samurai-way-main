@@ -9,8 +9,8 @@ type ProfileInfoType = {
 
 }
 
-const ProfileInfo = (props: ProfileInfoType) => {
-    if(!props.profile){
+const ProfileInfo = ({profile}: ProfileInfoType) => {
+    if(!profile){
         return <div>
             <Preloader/>
         </div>
@@ -18,11 +18,11 @@ const ProfileInfo = (props: ProfileInfoType) => {
     return (
         <div>
             <div className={classes.descriptionBlock}>
-                <div><img src={props.profile.photos.large} alt="myPhoto"/></div>
-                <div>{props.profile.fullName}</div>
+                <div><img src={profile.photos.large} alt="myPhoto"/></div>
+                <div>{profile.fullName}</div>
                 <ProfileStatusContainer/>
                 <h3>Description</h3>
-                <div>{props.profile.lookingForAJobDescription}</div>
+                <div>{profile.lookingForAJobDescription}</div>
 
             </div>
         </div>

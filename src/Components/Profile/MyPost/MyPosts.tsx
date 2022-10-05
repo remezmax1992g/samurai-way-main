@@ -5,7 +5,6 @@ import {MyPostContainerPropsType} from "./MyPostContainer";
 import {AddPostReduxForm} from "./AddPostForm/AddPostReduxForm";
 
 const MyPosts = React.memo((props: MyPostContainerPropsType) => {
-    console.log("MyPosts")
     let postsElement = props.statePost.map((p) =>
         <div key={p.id}>
             <Post message={p.message}

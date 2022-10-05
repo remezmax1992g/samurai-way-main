@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux";
-import profileReducer, {ProfileActionType} from "./reducers/profile-reducer";
-import dialogsReducer, {DialogsActionType} from "./reducers/dialogs-reducer";
-import usersReducer, {UserActionType} from "./reducers/users-reducer";
+import {ProfileActionType, profileReducer} from "./reducers/profile-reducer";
+import {DialogsActionType, dialogsReducer} from "./reducers/dialogs-reducer";
+import {UserActionType, usersReducer} from "./reducers/users-reducer";
 import sidebarReducer from "./reducers/sidebar-reducer";
 import {AuthActionType, authReducer} from "./reducers/auth-reducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk"

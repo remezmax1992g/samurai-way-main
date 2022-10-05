@@ -8,10 +8,10 @@ type ProfileLocalType = {
     profile: ProfileType
 }
 
-const Profile = (props: ProfileLocalType) => {
+const Profile = ({profile}: ProfileLocalType) => {
     return (
         <div className={classes.profile}>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={profile}/>
             <MyPostContainer/>
         </div>
     );

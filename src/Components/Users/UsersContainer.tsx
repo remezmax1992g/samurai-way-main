@@ -8,7 +8,6 @@ import {
 } from "../../Redux/reducers/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {WithAuthRedirect} from "../hoc/WithAuthRedirect";
 import {compose} from "redux";
 import {RootStateType} from "../../Redux/redux-store";
 import {
@@ -41,11 +40,13 @@ class UsersContainer extends React.Component<UsersContainerType> {
     }
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props;
+        this.props.requestUsers(currentPage, pageSize);
     }
 
     onClickChangePageHandler = (currentPage: number) => {
-        this.props.changePageOfUsers(currentPage, this.props.pageSize)
+        const {pageSize} = this.props;
+        this.props.changePageOfUsers(currentPage, pageSize);
     }
 
     render() {
@@ -77,6 +78,5 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsForUsersContainerTy
 
 export default compose<ComponentType>(
     connect(mapStateToProps,
-        {follow, unfollow, requestUsers, changePageOfUsers}),
-    WithAuthRedirect)
+        {follow, unfollow, requestUsers, changePageOfUsers}))
 (UsersContainer)

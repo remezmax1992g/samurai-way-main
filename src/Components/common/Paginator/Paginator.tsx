@@ -1,14 +1,14 @@
 import React from 'react';
-import styles from "../Users.module.css";
+import styles from "./Paginator.module.css";
 
-type PageOfUsersPropsType = {
+type PaginatorType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
     onClickChangePage: (page: number) => void
 }
 
-const PagesOfUsers = (props: PageOfUsersPropsType) => {
+const Paginator = (props: PaginatorType) => {
     const {totalUsersCount, pageSize, currentPage, onClickChangePage} = props
     let pages = []
     let pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -27,4 +27,4 @@ const PagesOfUsers = (props: PageOfUsersPropsType) => {
 }
 
 
-export default PagesOfUsers;
+export default Paginator;

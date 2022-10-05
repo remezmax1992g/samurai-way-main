@@ -1,4 +1,4 @@
-import profileReducer, {addPost, ProfilePageType, setStatusText} from "./profile-reducer";
+import {addPost, ProfilePageType, profileReducer, setStatusText} from "./profile-reducer";
 import {v1} from "uuid";
 
 let profileState: ProfilePageType

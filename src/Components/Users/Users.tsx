@@ -1,7 +1,7 @@
 import React from 'react';
 import {UserType} from "../../Redux/reducers/users-reducer";
 import User from "./User/User";
-import PagesOfUsers from "./PagesOfUsers/PagesOfUsers";
+import Paginator from "../common/Paginator/Paginator";
 
 type UsersPropsType = {
     totalUsersCount: number
@@ -30,10 +30,10 @@ const Users = (props: UsersPropsType) => {
     return (
         <div>
             <div>
-                <PagesOfUsers totalUsersCount={totalUsersCount}
-                              pageSize={pageSize}
-                              currentPage={currentPage}
-                              onClickChangePage={onClickChangePage}/>
+                <Paginator totalUsersCount={totalUsersCount}
+                           pageSize={pageSize}
+                           currentPage={currentPage}
+                           onClickChangePage={onClickChangePage}/>
             </div>
             <div>{
                 users.map((u) => {
