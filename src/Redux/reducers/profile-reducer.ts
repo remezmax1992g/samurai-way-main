@@ -15,7 +15,7 @@ export type ProfilePageType = {
     newStatusText: string
 }
 export type PostsDataType = {
-    id: string,
+    id?: string,
     message: string,
     likeCount: number,
 }

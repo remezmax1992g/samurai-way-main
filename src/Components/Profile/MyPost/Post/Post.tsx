@@ -1,8 +1,9 @@
 import React from 'react';
 import classes from ".//Post.module.css";
+import {PostsDataType} from "../../../../Redux/reducers/profile-reducer";
 
-const Post = (props:any) => {
-
+const Post = React.memo((props:PostsDataType) => {
+    console.log("Post")
     return (
      <span>
          <div className={classes.item}>
@@ -13,6 +14,6 @@ const Post = (props:any) => {
 
      </span>
     );
-};
+});
 
 export default Post;
