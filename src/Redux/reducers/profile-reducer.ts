@@ -11,7 +11,6 @@ export type ProfileActionType =
 export type ProfilePageType = {
     profile: ProfileType
     postsData: Array<PostsDataType>
-    newPostText: string
     newStatusText: string
 }
 export type PostsDataType = {
@@ -69,7 +68,6 @@ let initialState: ProfilePageType = {
         {id: v1(), message: "Hi, how are you?", likeCount: 11},
         {id: v1(), message: "It's my first post", likeCount: 12},
     ],
-    newPostText: "",
     newStatusText: "Hi"
 }
 
