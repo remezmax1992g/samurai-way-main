@@ -1,12 +1,15 @@
 import React from 'react';
 import classes from "./NavBar.module.css";
 import {NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {RootStateType} from "../../Redux/redux-store";
 
 const NavBar = () => {
+    const userID = useSelector<RootStateType, number| null>(state => state.auth.userID)
     return (
         <nav className={classes.nav}>
             <div className={classes.item}>
-                <NavLink to={"/Profile"} activeClassName={classes.activeLink}>Profile</NavLink>
+                <NavLink to={`/Profile/${userID}`} activeClassName={classes.activeLink}>Profile</NavLink>
             </div>
             <div className={classes.item}>
                 <NavLink to={"/Users"} activeClassName={classes.activeLink}>Users</NavLink>

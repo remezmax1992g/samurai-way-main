@@ -111,7 +111,7 @@ export const requestUsers = (currentPage: number, pageSize: number): AppThunk =>
 }
 export const changePageOfUsers = (currentPage: number, pageSize: number): AppThunk => async dispatch => {
     dispatch(toggleIsFetching(true))
-    dispatch(setCurrentPage(currentPage,))
+    dispatch(setCurrentPage(currentPage))
     const res = await usersAPI.getUsers(currentPage, pageSize)
     dispatch(toggleIsFetching(false))
     dispatch(setUsers(res.items))

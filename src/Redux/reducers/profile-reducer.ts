@@ -101,18 +101,13 @@ export const setProfile = (profile: ProfileType) => ({
     payload: {profile}
 }) as const
 //thunkCreators
-export const getProfile = (userID: string): AppThunk => async (dispatch, getState) => {
-    if (!userID) {
-        userID = JSON.stringify(getState().auth.userID)
-    }
+export const getProfile = (userID: string): AppThunk => async dispatch => {
+    console.log(userID)
     const res = await profileAPI.getProfile(userID)
     dispatch(setProfile(res))
 
 }
-export const getStatus = (userID: string): AppThunk => async (dispatch, getState) => {
-    if (!userID) {
-        userID = JSON.stringify(getState().auth.userID)
-    }
+export const getStatus = (userID: string): AppThunk => async dispatch => {
     const res = await profileAPI.getStatus(userID)
     dispatch(setStatusText(res))
 }

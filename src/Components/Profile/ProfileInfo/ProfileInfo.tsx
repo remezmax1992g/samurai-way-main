@@ -6,7 +6,6 @@ import ProfileStatusContainer from "./ProfileStatus/ProfileStatusContainer";
 
 type ProfileInfoType = {
     profile: ProfileType
-
 }
 
 const ProfileInfo = ({profile}: ProfileInfoType) => {

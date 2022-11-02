@@ -37,8 +37,8 @@ export const setAuthUserData = (userID: number | null, email: string | null, log
 //thunkCreators
 export const getAuthUserData = (): AppThunk => async dispatch => {
     const res = await authAPI.getAuth()
+    let {id, email, login} = res.data
     if (res.resultCode === 0) {
-        let {id, email, login} = res.data
         dispatch(setAuthUserData(id, email, login, true))
     }
 }

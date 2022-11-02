@@ -3,7 +3,6 @@ import classes from ".//Post.module.css";
 import {PostsDataType} from "../../../../Redux/reducers/profile-reducer";
 
 const Post = React.memo((props:PostsDataType) => {
-    console.log("Post")
     return (
      <span>
          <div className={classes.item}>

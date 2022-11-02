@@ -11,6 +11,7 @@ type LoginFieldsType = {
 const Login = () => {
     const dispatch = useDispatch()
     const isLogin = useSelector<RootStateType, boolean>(state => state.auth.isAuth)
+    const userID = useSelector<RootStateType, number| null>(state => state.auth.userID)
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -32,7 +33,7 @@ const Login = () => {
         }
     })
     if (isLogin) {
-        return <Redirect to={"/Profile"}/>
+        return <Redirect to={`/Profile/${userID}`}/>
     }
     return (
         <div>

@@ -9,6 +9,7 @@ import {RootStateType} from "../../Redux/redux-store";
 
 type MapStateToPropsForProfileContainerType = {
     profile: ProfileType
+    authUserID: number | null
 }
 type MapDispatchToPropsForProfileContainer = {
     getProfile: (userID: string) => void
@@ -28,8 +29,11 @@ class ProfileContainer extends React.Component<CommonProfileContainerPropsType> 
 
     componentDidMount() {
         let userID = this.props.match.params.userId
-        this.props.getProfile(userID)
-        this.props.getStatus(userID)
+        if (!userID) {
+            userID = String(this.props.authUserID)
+        }
+            this.props.getProfile(userID)
+            this.props.getStatus(userID)
     }
 
     render() {
@@ -40,6 +44,10 @@ class ProfileContainer extends React.Component<CommonProfileContainerPropsType> 
 let mapStateToProps = (state: RootStateType): MapStateToPropsForProfileContainerType => {
     return {
         profile: state.profilePage.profile,
+        authUserID: state.auth.userID
     }
 }
-export default compose<ComponentType>(connect(mapStateToProps, {getProfile, getStatus}),withRouter,WithAuthRedirect)(ProfileContainer)
+export default compose<ComponentType>(connect(mapStateToProps, {
+    getProfile,
+    getStatus
+}), withRouter, WithAuthRedirect)(ProfileContainer)
