@@ -23,22 +23,22 @@ const ProfileStatus = (props: ProfileStatusPropsType) => {
        setStatusText(event.currentTarget.value)
     }
     return (
-            <div>
+            <div>Status:
                 {!editMode
                 ?
-                <div>
+                <span>
                     <span onDoubleClick={activateEditMode}>
                         {props.newStatusText || "No status"}
                     </span>
-                </div>
+                </span>
                 :
-                <div>
+                <span>
                     <input type="text"
                            value={statusText}
                            onBlur={deactivateEditMode}
                            onChange={editStatusTextHandler}
                            autoFocus/>
-                </div>}
+                </span>}
             </div>
         )
 }

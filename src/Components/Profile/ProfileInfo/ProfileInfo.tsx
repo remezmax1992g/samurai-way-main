@@ -23,7 +23,7 @@ const ProfileInfo = ({profile, isOwner, savePhoto}: ProfileInfoType) => {
         : <div className={classes.descriptionBlock}>
                 <div className={classes.imgProfileInfo}><img src={profile.photos.large || unknownUser}/></div>
                 {isOwner && <input type="file" onChange={onChangeProfilePhoto}/>}
-                <div>{profile.fullName}</div>
+                <div>Full name: {profile.fullName}</div>
                 <ProfileStatusContainer/>
                 <h3>Description</h3>
                 <div>{profile.lookingForAJobDescription}</div>
