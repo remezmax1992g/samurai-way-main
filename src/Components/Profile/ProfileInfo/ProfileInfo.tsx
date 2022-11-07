@@ -18,7 +18,7 @@ const ProfileInfo = ({profile}: ProfileInfoType) => {
     return (
         <div>
             <div className={classes.descriptionBlock}>
-                 <div className={classes.imgProfileInfo}> {profile.photos.large ? <img src={profile.photos.large}/> : <img src={unknownUser}/>}</div>
+                <div className={classes.imgProfileInfo}><img src={profile.photos.large || unknownUser}/></div>
                 <div>{profile.fullName}</div>
                 <ProfileStatusContainer/>
                 <h3>Description</h3>

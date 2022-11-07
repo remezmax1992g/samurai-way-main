@@ -1,6 +1,6 @@
 import React, {ComponentType} from "react"
 import Profile from "./Profile";
-import {getProfile, getStatus, ProfileType} from "../../Redux/reducers/profile-reducer";
+import {getProfile, getStatus, ProfilePageType, ProfileType} from "../../Redux/reducers/profile-reducer";
 import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../hoc/WithAuthRedirect";
@@ -26,14 +26,23 @@ class ProfileContainer extends React.Component<CommonProfileContainerPropsType> 
     constructor(props: CommonProfileContainerPropsType) {
         super(props);
     }
-
-    componentDidMount() {
+    refreshProfile(){
         let userID = this.props.match.params.userId
         if (!userID) {
             userID = String(this.props.authUserID)
         }
-            this.props.getProfile(userID)
-            this.props.getStatus(userID)
+        this.props.getProfile(userID)
+        this.props.getStatus(userID)
+    }
+
+    componentDidMount() {
+       this.refreshProfile()
+    }
+    componentDidUpdate(prevProps: CommonProfileContainerPropsType, prevState: ProfilePageType) {
+        if(this.props.match.params.userId != prevProps.match.params.userId){
+            this.refreshProfile()
+        }
+
     }
 
     render() {
