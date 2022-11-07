@@ -1,5 +1,5 @@
-.imgProfileInfo {
-    width: 300px;
-    height: 370px;
-    padding: 20px;
+.imgProfileInfo img {
+    max-width: 300px;
+    max-height: 370px;
+    padding: 5px;
 }

@@ -102,7 +102,6 @@ export const setProfile = (profile: ProfileType) => ({
 }) as const
 //thunkCreators
 export const getProfile = (userID: string): AppThunk => async dispatch => {
-    console.log(userID)
     const res = await profileAPI.getProfile(userID)
     dispatch(setProfile(res))
 

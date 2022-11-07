@@ -1,7 +1,7 @@
 import React, {ComponentType} from 'react';
 import './App.css';
 import NavBar from "./Components/NavBar/NavBar";
-import {Route, RouteComponentProps, withRouter} from "react-router-dom";
+import {BrowserRouter, Route, RouteComponentProps, withRouter} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
@@ -11,9 +11,9 @@ import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
 import {compose} from "redux";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializing} from "./Redux/reducers/app-reducer";
-import {RootStateType} from "./Redux/redux-store";
+import store, {RootStateType} from "./Redux/redux-store";
 import Preloader from "./Components/common/Preloader/Preloader";
 
 type MapStateToPropsForAppType = {
@@ -42,6 +42,7 @@ class App extends React.Component<AppType> {
                     <Route exact path="/Music" render={() => <Music/>}/>
                     <Route exact path="/Settings" render={() => <Settings/>}/>
                     <Route exact path="/Login" render={() => <Login/>}/>
+                    <Route exact path="*" render={() => <Login/>}/>
                 </div>
             </div>
         );
@@ -53,4 +54,14 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsForAppType => {
     }
 }
 
-export default compose<ComponentType>(connect(mapStateToProps, {initializing}), withRouter)(App);
+const AppContainer = compose<ComponentType>(connect(mapStateToProps, {initializing}), withRouter)(App);
+const MainApp = () => {
+    return(
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </BrowserRouter>
+    )
+}
+export default MainApp

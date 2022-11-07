@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 
 type ProfileStatusPropsType = {
     newStatusText: string
-    updateStatus:(newStatusText: string) => void
+    updateStatus?:(newStatusText: string) => void
 }
 
 const ProfileStatus = (props: ProfileStatusPropsType) => {
@@ -16,7 +16,7 @@ const ProfileStatus = (props: ProfileStatusPropsType) => {
     }
     const deactivateEditMode = () => {
         setEditMode(false)
-        props.updateStatus(statusText)
+        props.updateStatus && props.updateStatus(statusText)
         setStatusText("")
     }
     const editStatusTextHandler = (event: ChangeEvent<HTMLInputElement>) => {

@@ -1,9 +1,10 @@
 .page{
     margin-left: 3px;
     font-size: 20px;
+    border: solid 1px grey;
     cursor: pointer;
 }
 .selectedPage{
     font-weight: bold;
-    color: palevioletred;
+    color: black;
 }

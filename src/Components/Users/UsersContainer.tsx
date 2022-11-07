@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {
     changePageOfUsers,
     follow,
-    requestUsers,
+    requestUsers, setPortionNumber,
     unfollow, UserType,
 } from "../../Redux/reducers/users-reducer";
 import Users from "./Users";
@@ -13,7 +13,7 @@ import {RootStateType} from "../../Redux/redux-store";
 import {
     getCurrentPage, getFollowingProgress,
     getIsFetching,
-    getPageSize,
+    getPageSize, getPortionSize,
     getTotalUsersCount,
     getUsers
 } from "../../Redux/selectors/users-selector";
@@ -23,6 +23,7 @@ type MapStateToPropsForUsersContainerType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    portionSize: number
     isFetching: boolean
     followingProgress: Array<number>
 }
@@ -31,6 +32,7 @@ type MapDispatchToPropsForUsersContainerType = {
     unfollow: (userID: number) => void,
     requestUsers: (currentPage: number, pageSize: number) => void
     changePageOfUsers: (currentPage: number, pageSize: number) => void
+    setPortionNumber: (portionNumber: number) => void
 }
 export type UsersContainerType = MapDispatchToPropsForUsersContainerType & MapStateToPropsForUsersContainerType
 
@@ -56,11 +58,13 @@ class UsersContainer extends React.Component<UsersContainerType> {
                 : <Users totalUsersCount={this.props.totalUsersCount}
                          pageSize={this.props.pageSize}
                          currentPage={this.props.currentPage}
+                         portionSize={this.props.portionSize}
                          users={this.props.users}
                          followingProgress={this.props.followingProgress}
                          followToUser={this.props.follow}
                          unfollowToUser={this.props.unfollow}
-                         onClickChangePage={this.onClickChangePageHandler}/>}
+                         onClickChangePage={this.onClickChangePageHandler}
+                        />}
         </>
     }
 }
@@ -71,6 +75,7 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsForUsersContainerTy
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
+        portionSize: getPortionSize(state),
         isFetching: getIsFetching(state),
         followingProgress: getFollowingProgress(state)
     }
@@ -78,5 +83,5 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsForUsersContainerTy
 
 export default compose<ComponentType>(
     connect(mapStateToProps,
-        {follow, unfollow, requestUsers, changePageOfUsers}))
+        {follow, unfollow, requestUsers, changePageOfUsers, setPortionNumber}))
 (UsersContainer)

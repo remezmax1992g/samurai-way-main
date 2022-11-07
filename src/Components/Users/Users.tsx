@@ -7,6 +7,7 @@ type UsersPropsType = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
+    portionSize: number
     users: Array<UserType>
     followingProgress: Array<number>
     followToUser: (id: number) => void
@@ -19,6 +20,7 @@ const Users = (props: UsersPropsType) => {
         totalUsersCount,
         pageSize,
         currentPage,
+        portionSize,
         users,
         followingProgress,
         followToUser,
@@ -30,9 +32,10 @@ const Users = (props: UsersPropsType) => {
     return (
         <div>
             <div>
-                <Paginator totalUsersCount={totalUsersCount}
+                <Paginator totalItemsCount={totalUsersCount}
                            pageSize={pageSize}
                            currentPage={currentPage}
+                           portionSize={portionSize}
                            onClickChangePage={onClickChangePage}/>
             </div>
             <div>{
