@@ -1,7 +1,7 @@
 import React, {ComponentType} from 'react';
 import './App.css';
 import NavBar from "./Components/NavBar/NavBar";
-import {BrowserRouter, Route, RouteComponentProps, withRouter} from "react-router-dom";
+import {HashRouter, Route, RouteComponentProps, withRouter} from "react-router-dom";
 import Settings from "./Components/Settings/Settings";
 import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
@@ -65,11 +65,11 @@ let mapStateToProps = (state: RootStateType): MapStateToPropsForAppType => {
 const AppContainer = compose<ComponentType>(connect(mapStateToProps, {initializing}), withRouter)(App);
 const MainApp = () => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
 export default MainApp
