@@ -6,12 +6,14 @@ import {ProfileType} from "../../Redux/reducers/profile-reducer";
 
 type ProfileLocalType = {
     profile: ProfileType
+    isOwner: boolean
+    savePhoto: (file: File) => void
 }
 
-const Profile = ({profile}: ProfileLocalType) => {
+const Profile = ({profile, isOwner, savePhoto}: ProfileLocalType) => {
     return (
         <div className={classes.profile}>
-            <ProfileInfo profile={profile}/>
+            <ProfileInfo profile={profile} isOwner={isOwner} savePhoto={savePhoto}/>
             <MyPostContainer/>
         </div>
     );

@@ -6,6 +6,7 @@ export type ProfileActionType =
     | ReturnType<typeof addPost>
     | ReturnType<typeof setProfile>
     | ReturnType<typeof setStatusText>
+    | ReturnType<typeof savePhotos>
 
 export type ProfilePageType = {
     profile: ProfileType
@@ -32,15 +33,17 @@ export type ProfileType = {
         youtube: string
         mainLink: string
     }
-    photos: {
-        small: string
-        large: string
-    }
+    photos: PhotosType
+}
+type PhotosType = {
+    small: string
+    large: string
 }
 
 const ADD_POST = "profile/ADD-POST";
 const SET_PROFILE = "profile/SET-PROFILE";
 const SET_STATUS_TEXT = "profile/SET-STATUS-TEXT"
+const SAVE_PHOTOS = "profile/SAVE-PHOTOS"
 
 let initialState: ProfilePageType = {
     profile: {
@@ -83,6 +86,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
             return {...state, newStatusText: action.payload.newStatusText}
         case SET_PROFILE:
             return {...state, profile: action.payload.profile}
+        case SAVE_PHOTOS:
+            return {...state, profile: {...state.profile, photos: action.payload.photos}}
         default:
             return state
     }
@@ -100,6 +105,10 @@ export const setProfile = (profile: ProfileType) => ({
     type: SET_PROFILE,
     payload: {profile}
 }) as const
+export const savePhotos = (photos: PhotosType) => ({
+    type: SAVE_PHOTOS,
+    payload: {photos}
+}) as const
 //thunkCreators
 export const getProfile = (userID: string): AppThunk => async dispatch => {
     const res = await profileAPI.getProfile(userID)
@@ -114,5 +123,11 @@ export const updateStatus = (newStatusText: string): AppThunk => async dispatch 
     const res = await profileAPI.putStatus(newStatusText)
     if (res.resultCode === 0) {
         dispatch(setStatusText(newStatusText))
+    }
+}
+export const savePhoto = (file: File): AppThunk => async dispatch => {
+    const res = await profileAPI.putPhoto(file)
+    if (res.resultCode === 0) {
+        dispatch(savePhotos(res.data.photos))
     }
 }
