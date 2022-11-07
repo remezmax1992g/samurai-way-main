@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {profileAPI} from "../../api/api";
+import {profileAPI, ProfileParamsType} from "../../api/api";
 import {AppThunk} from "../redux-store";
 
 export type ProfileActionType =
@@ -7,6 +7,7 @@ export type ProfileActionType =
     | ReturnType<typeof setProfile>
     | ReturnType<typeof setStatusText>
     | ReturnType<typeof savePhotos>
+    | ReturnType<typeof saveProfile>
 
 export type ProfilePageType = {
     profile: ProfileType
@@ -18,33 +19,19 @@ export type PostsDataType = {
     message: string,
     likeCount: number,
 }
-export type ProfileType = {
-    userId: number
-    lookingForAJob: true
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: ContactsType
+export type ProfileType = ProfileParamsType & {
     photos: PhotosType
 }
 type PhotosType = {
     small: string
     large: string
 }
-export type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
 
 const ADD_POST = "profile/ADD-POST";
 const SET_PROFILE = "profile/SET-PROFILE";
 const SET_STATUS_TEXT = "profile/SET-STATUS-TEXT"
 const SAVE_PHOTOS = "profile/SAVE-PHOTOS"
+const SAVE_PROFILE = "profile/SAVE-PROFILE"
 
 let initialState: ProfilePageType = {
     profile: {
@@ -89,6 +76,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
             return {...state, profile: action.payload.profile}
         case SAVE_PHOTOS:
             return {...state, profile: {...state.profile, photos: action.payload.photos}}
+        case SAVE_PROFILE:
+            return {...state, profile: {...state.profile, ...action.payload.profile}}
         default:
             return state
     }
@@ -110,11 +99,14 @@ export const savePhotos = (photos: PhotosType) => ({
     type: SAVE_PHOTOS,
     payload: {photos}
 }) as const
+export const saveProfile = (profile: ProfileParamsType) => ({
+    type: SAVE_PROFILE,
+    payload: {profile}
+}) as const
 //thunkCreators
 export const getProfile = (userID: string): AppThunk => async dispatch => {
     const res = await profileAPI.getProfile(userID)
     dispatch(setProfile(res))
-
 }
 export const getStatus = (userID: string): AppThunk => async dispatch => {
     const res = await profileAPI.getStatus(userID)

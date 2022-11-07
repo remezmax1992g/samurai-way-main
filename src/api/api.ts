@@ -49,13 +49,19 @@ export const profileAPI = {
                 return response.data
             })
     },
-    putPhoto(file: any){
+    putPhoto(file: File){
         const formData = new FormData()
         formData.append("image", file)
         return instance.put(`/profile/photo`, formData, {
             headers:{
                 'Content-Type': 'multipart/form-data'
             }})
+            .then(response => {
+                return response.data
+            })
+    },
+    putProfile(profile: ProfileParamsType){
+        return instance.put(`profile`, profile)
             .then(response => {
                 return response.data
             })
@@ -87,4 +93,21 @@ export type LoginParamsType = {
     password: string
     rememberMe: boolean
     captcha?: string
+}
+export type ProfileParamsType = {
+    userId: number
+    lookingForAJob: true
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+}
+export type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
 }
