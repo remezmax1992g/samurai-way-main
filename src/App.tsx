@@ -1,6 +1,5 @@
 import React, {ComponentType} from 'react';
 import './App.css';
-import NavBar from "./Components/NavBar/NavBar";
 import {HashRouter, Route, RouteComponentProps, withRouter} from "react-router-dom";
 import Settings from "./Components/Settings/Settings";
 import UsersContainer from "./Components/Users/UsersContainer";
@@ -40,7 +39,6 @@ class App extends React.Component<AppType> {
         return (
             <div className="app-wrapper">
                 <HeaderContainer/>
-                <NavBar/>
                 <div className="app-wrapper-content">
                     <Route exact path="/Dialogs" render={() => <SuspendedDialogs/>}/>
                     <Route exact path="/Profile/:userId?" render={() => <SuspendedProfile/>}/>

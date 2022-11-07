@@ -1,21 +1,26 @@
 import React from 'react';
 import classes from "./Header.module.css";
 import {NavLink} from "react-router-dom";
+import NavBar from "../NavBar/NavBar";
 
 type HeaderType = {
     isAuth: boolean,
     login: string | null
+    photo: string
     logout: () => void
 }
 
 const Header = (props: HeaderType) => {
     return (
         <header className={classes.header}>
-            <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhnDz08lUWsDll_7m1NYkHV_U2gNmfvTWCGg&usqp=CAU"/>
+            <NavBar/>
             <div className={classes.loginBlock}>
                 {props.isAuth
-                    ? <div>{props.login} <button onClick={props.logout}>Logout</button></div>
+                    ? <div className={classes.login}>
+                        <span>{props.login} </span>
+                        <img className={classes.avatar} src={props.photo}/>
+                        <button onClick={props.logout}>Logout</button>
+                    </div>
                     : <NavLink to={"/Login"}>Login</NavLink>}
             </div>
         </header>

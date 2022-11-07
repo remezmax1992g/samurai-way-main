@@ -1,13 +1,15 @@
 .nav {
-    grid-area: nav;
-    background-color: burlywood;
-    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 70vh;
 }
 
-.item a{
-    color: white;
-    text-decoration: none;
+.item a {
+
 }
- .item a.activeLink{
+
+.item a.activeLink {
     color: red;
 }
