@@ -2,14 +2,16 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 
 type ProfileStatusPropsType = {
     newStatusText: string
-    updateStatus?:(newStatusText: string) => void
+    updateStatus?: (newStatusText: string) => void
 }
 
 const ProfileStatus = (props: ProfileStatusPropsType) => {
-    const[editMode, setEditMode] = useState<boolean>(false)
-    const[statusText, setStatusText] = useState<string>(props.newStatusText)
+    const [editMode, setEditMode] = useState<boolean>(false)
+    const [statusText, setStatusText] = useState<string>(props.newStatusText)
 
-    useEffect(() => {setStatusText(props.newStatusText)}, [props.newStatusText])
+    useEffect(() => {
+        setStatusText(props.newStatusText)
+    }, [props.newStatusText])
 
     const activateEditMode = () => {
         setEditMode(true)
@@ -20,16 +22,14 @@ const ProfileStatus = (props: ProfileStatusPropsType) => {
         setStatusText("")
     }
     const editStatusTextHandler = (event: ChangeEvent<HTMLInputElement>) => {
-       setStatusText(event.currentTarget.value)
+        setStatusText(event.currentTarget.value)
     }
     return (
-            <div>Status:
-                {!editMode
+        <div><b>Status: </b>
+            {!editMode
                 ?
-                <span>
-                    <span onDoubleClick={activateEditMode}>
+                <span onDoubleClick={activateEditMode}>
                         {props.newStatusText || "No status"}
-                    </span>
                 </span>
                 :
                 <span>
@@ -39,8 +39,8 @@ const ProfileStatus = (props: ProfileStatusPropsType) => {
                            onChange={editStatusTextHandler}
                            autoFocus/>
                 </span>}
-            </div>
-        )
+        </div>
+    )
 }
 
 export default ProfileStatus;

@@ -23,21 +23,22 @@ export type ProfileType = {
     lookingForAJob: true
     lookingForAJobDescription: string
     fullName: string
-    contacts: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
-    }
+    contacts: ContactsType
     photos: PhotosType
 }
 type PhotosType = {
     small: string
     large: string
+}
+export type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
 }
 
 const ADD_POST = "profile/ADD-POST";
