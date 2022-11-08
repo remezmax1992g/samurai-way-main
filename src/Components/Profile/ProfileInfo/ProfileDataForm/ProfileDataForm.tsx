@@ -1,18 +1,28 @@
 import React from 'react';
 import {ProfileType, saveProfileTC} from "../../../../Redux/reducers/profile-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {useFormik} from "formik";
+import {FormikErrors, useFormik} from "formik";
 import {RootStateType} from "../../../../Redux/redux-store";
-import {ContactsType} from "../../../../api/api";
+import {ContactsType, ProfileParamsType} from "../../../../api/api";
 
 type ProfileDataForm = {
     setEditMode: () => void
 }
-type ProfileDataFormErrorType = {
-    fullName?: string
-    lookingForAJobDescription?: string
-    aboutMe?: string
-}
+// type ProfileDataFormErrorType = {
+//     fullName?: string
+//     lookingForAJobDescription?: string
+//     aboutMe?: string
+//     contacts: {
+//         github: string
+//         vk: string
+//         facebook: string
+//         instagram: string
+//         twitter: string
+//         website: string
+//         youtube: string
+//         mainLink: string
+//     }
+// }
 
 const ProfileDataForm = ({setEditMode}: ProfileDataForm) => {
     const dispatch = useDispatch()
@@ -41,7 +51,7 @@ const ProfileDataForm = ({setEditMode}: ProfileDataForm) => {
 
         },
         validate: values => {
-            const errors: ProfileDataFormErrorType = {};
+            const errors: FormikErrors<ProfileParamsType & ContactsType> = {};
             if (!values.fullName) {
                 errors.fullName = 'Required';
             } else if (values.fullName.length > 20) {
@@ -57,6 +67,30 @@ const ProfileDataForm = ({setEditMode}: ProfileDataForm) => {
             } else if (values.aboutMe.length > 1000) {
                 errors.aboutMe = 'Must be 1000 characters or less';
             }
+            // if (!/http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/.test(values.contacts.twitter)) {
+            //     errors.twitter = 'Invalid Twitter name';
+            // }
+            // if (!/^(((https?)\:\/\/)?(www\.)?)?(vk\.com\/[A-Za-z0-9-]\/?)$/.test(values.contacts.vk)) {
+            //     errors.vk = 'Invalid VK name';
+            // }
+            // if (!/^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$/.test(values.contacts.github)) {
+            //     errors.github = 'Invalid Github name';
+            // }
+            // if (!/^(http\:\/\/)?(youtube\.com|youtu\.be)+$/.test(values.contacts.youtube)) {
+            //     errors.youtube = 'Invalid Youtube name';
+            // }
+            // if (/(?:https?:\/\/)?(?:www\.)?(?:facebook|fb|m\.facebook)\.(?:com|me)\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[\w\-]*\/)*([\w\-\.]+)(?:\/)?/.test(values.contacts.facebook)) {
+            //     errors.facebook = 'Invalid Facebook name';
+            // }
+            // if (!/(?:(?:http|https):\/\/)?(?:www.)?(?:instagram.com|instagr.am|instagr.com)\/(\w+)/.test(values.contacts.instagram)) {
+            //     errors.instagram = 'Invalid Instagram name';
+            // }
+            // if (!/http(s)?:\/\/([\w]+\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?/.test(values.contacts.mainLink)) {
+            //     errors.mainLink = 'Invalid Linkedin mainLink';
+            // }
+            // if (!/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(values.contacts.website)) {
+            //     errors.website = 'Invalid Website name';
+            // }
             return errors;
         }
     })
@@ -115,6 +149,8 @@ const ProfileDataForm = ({setEditMode}: ProfileDataForm) => {
             </div>
             <div>
                 <b>Contacts:</b>{Object.keys(profile.contacts).map((key) => {
+                // @ts-ignore
+                // @ts-ignore
                 return (
                     <div key={key}>
                         <b>{key}:</b>
@@ -125,6 +161,9 @@ const ProfileDataForm = ({setEditMode}: ProfileDataForm) => {
                                    onChange={formik.handleChange}
                                    value={formik.values.contacts[key as keyof ContactsType]}
                             />
+                            {/*{formik.touched.contacts?[key] && formik.errors?[key]*/}
+                            {/*    ? <div style={{color: "red"}}>{formik.errors?[key]}</div>*/}
+                            {/*    : null}*/}
                         </div>
                     </div>
                 )
