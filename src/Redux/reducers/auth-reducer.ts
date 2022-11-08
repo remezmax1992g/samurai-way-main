@@ -58,14 +58,20 @@ export const createLogin = (data: LoginParamsType): AppThunk => async dispatch =
     if (res.resultCode === 0) {
         dispatch(getAuthUserData())
     }
+    else if (res.resultCode === 10){
+        dispatch(getCaptcha())
+    }
+
 }
 export const deleteLogin = (): AppThunk => async dispatch => {
     const res = await authAPI.logout()
     if (res.resultCode === 0) {
         dispatch(setAuthUserData(null, null, null, false))
+        dispatch(setCaptchaURL(""))
     }
 }
 export const getCaptcha = (): AppThunk => async dispatch => {
     const res = await securityAPI.getCaptchaURL()
-    dispatch(setCaptchaURL(res.data.captchaURL))
+    console.log(res)
+    dispatch(setCaptchaURL(res.url))
 }

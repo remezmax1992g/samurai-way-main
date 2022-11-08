@@ -4,6 +4,7 @@ import {createLogin} from "../../Redux/reducers/auth-reducer";
 import {useFormik} from "formik";
 import {Redirect} from "react-router-dom";
 import {RootStateType} from "../../Redux/redux-store";
+
 type LoginFieldsType = {
     email?: string
     password?: string
@@ -11,12 +12,14 @@ type LoginFieldsType = {
 const Login = () => {
     const dispatch = useDispatch()
     const isLogin = useSelector<RootStateType, boolean>(state => state.auth.isAuth)
-    const userID = useSelector<RootStateType, number| null>(state => state.auth.userID)
+    const userID = useSelector<RootStateType, number | null>(state => state.auth.userID)
+    const captchaURL = useSelector<RootStateType, string>(state => state.auth.captchaURL)
     const formik = useFormik({
         initialValues: {
             email: "",
             password: "",
-            rememberMe: false
+            rememberMe: false,
+            captcha: ""
         },
         onSubmit: values => {
             dispatch(createLogin(values))
@@ -80,6 +83,18 @@ const Login = () => {
                         onChange={formik.handleChange}
                     />
                     <span>Remember me</span>
+                </div>
+                <div>
+                    {captchaURL &&
+                        <img src={captchaURL}/>}
+                    {captchaURL &&
+                        <div>
+                            <input type="text"
+                                   name="captcha"
+                                   placeholder="Enter captcha"
+                                   onChange={formik.handleChange}
+                                   value={formik.values.captcha}/>
+                        </div>}
                 </div>
                 <button type="submit">Login</button>
             </form>
