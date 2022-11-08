@@ -1,6 +1,6 @@
 import React, {ComponentType} from 'react';
 import './App.css';
-import {HashRouter, Route, RouteComponentProps, withRouter} from "react-router-dom";
+import {HashRouter, Redirect, Route, RouteComponentProps, withRouter} from "react-router-dom";
 import Settings from "./Components/Settings/Settings";
 import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
@@ -40,6 +40,7 @@ class App extends React.Component<AppType> {
             <div className="app-wrapper">
                 <HeaderContainer/>
                 <div className="app-wrapper-content">
+                    <Route exact path="/" render={() => <Redirect to="/Login"/>}/>
                     <Route path="/Dialogs" render={() => <SuspendedDialogs/>}/>
                     <Route exact path="/Profile/:userId?" render={() => <SuspendedProfile/>}/>
                     <Route exact path="/Users" render={() => <UsersContainer/>}/>
@@ -47,7 +48,7 @@ class App extends React.Component<AppType> {
                     <Route exact path="/Music" render={() => <SuspendedMusic/>}/>
                     <Route exact path="/Settings" render={() => <Settings/>}/>
                     <Route exact path="/Login" render={() => <Login/>}/>
-                    <Route exact path="/" render={() => <Login/>}/>
+
                     <Route exact path="*" render={() => <div>404 - Page not found</div>}/>
                 </div>
             </div>
