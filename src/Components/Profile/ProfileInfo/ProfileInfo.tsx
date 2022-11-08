@@ -30,7 +30,7 @@ const ProfileInfo = ({profile, isOwner, savePhoto}: ProfileInfoType) => {
                 <div className={classes.imgProfileInfo}><img src={profile.photos.large || unknownUser}/></div>
                 {isOwner && <input type="file" onChange={onChangeProfilePhoto}/>}
                 <div>
-                    {isEdit ? <ProfileDataForm profile={profile} setEditMode={onChangeEditMode}/>: <ProfileData profile={profile} setEditMode={onChangeEditMode} isOwner={isOwner}/>}
+                    {isEdit ? <ProfileDataForm setEditMode={onChangeEditMode}/>: <ProfileData profile={profile} setEditMode={onChangeEditMode} isOwner={isOwner}/>}
                     <ProfileStatusContainer/>
                 </div>
 

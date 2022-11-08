@@ -96,9 +96,10 @@ export type LoginParamsType = {
 }
 export type ProfileParamsType = {
     userId: number
-    lookingForAJob: true
+    lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
+    aboutMe: string
     contacts: ContactsType
 }
 export type ContactsType = {

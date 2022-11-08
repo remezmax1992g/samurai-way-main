@@ -23,6 +23,10 @@ const ProfileData = ({profile, isOwner, setEditMode}: ProfileDataType) => {
                     <span><b>My professional skills:</b>{profile.lookingForAJobDescription}</span>}
             </div>
             <div>
+                {profile.aboutMe &&
+                    <span><b>My personal information:</b>{profile.aboutMe}</span>}
+            </div>
+            <div>
                 <b>Contacts:</b>{Object.keys(profile.contacts).map((key)=> {
                 return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key as keyof ContactsType]}/>
             })}

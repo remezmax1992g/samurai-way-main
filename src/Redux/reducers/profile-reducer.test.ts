@@ -9,6 +9,7 @@ beforeEach(() => {
             lookingForAJob: true,
             lookingForAJobDescription: "",
             fullName: "",
+            aboutMe: "",
             contacts: {
                 github: "",
                 vk: "",

@@ -39,6 +39,7 @@ let initialState: ProfilePageType = {
         lookingForAJob: true,
         lookingForAJobDescription: "",
         fullName: "",
+        aboutMe: "",
         contacts: {
             github: "",
             vk: "",
@@ -122,5 +123,12 @@ export const savePhoto = (file: File): AppThunk => async dispatch => {
     const res = await profileAPI.putPhoto(file)
     if (res.resultCode === 0) {
         dispatch(savePhotos(res.data.photos))
+    }
+}
+export const saveProfileTC = (profile: ProfileParamsType): AppThunk => async dispatch =>{
+    const res = await profileAPI.putProfile(profile)
+    console.log(res)
+    if (res.resultCode === 0) {
+        dispatch(saveProfile(profile))
     }
 }
