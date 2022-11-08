@@ -40,7 +40,7 @@ class App extends React.Component<AppType> {
             <div className="app-wrapper">
                 <HeaderContainer/>
                 <div className="app-wrapper-content">
-                    <Route exact path="/Dialogs" render={() => <SuspendedDialogs/>}/>
+                    <Route path="/Dialogs" render={() => <SuspendedDialogs/>}/>
                     <Route exact path="/Profile/:userId?" render={() => <SuspendedProfile/>}/>
                     <Route exact path="/Users" render={() => <UsersContainer/>}/>
                     <Route exact path="/News" render={() => <SuspendedNews/>}/>
@@ -48,6 +48,7 @@ class App extends React.Component<AppType> {
                     <Route exact path="/Settings" render={() => <Settings/>}/>
                     <Route exact path="/Login" render={() => <Login/>}/>
                     <Route exact path="/" render={() => <Login/>}/>
+                    <Route exact path="*" render={() => <div>404 - Page not found</div>}/>
                 </div>
             </div>
         );
