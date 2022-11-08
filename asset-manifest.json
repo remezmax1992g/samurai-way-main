@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/samurai-way-main/static/css/main.102502ed.css",
-    "main.js": "/samurai-way-main/static/js/main.c912d8b8.js",
+    "main.js": "/samurai-way-main/static/js/main.92a9bcc6.js",
     "static/css/994.b8c5445a.chunk.css": "/samurai-way-main/static/css/994.b8c5445a.chunk.css",
     "static/js/994.210df594.chunk.js": "/samurai-way-main/static/js/994.210df594.chunk.js",
-    "static/css/955.11b38a66.chunk.css": "/samurai-way-main/static/css/955.11b38a66.chunk.css",
+    "static/css/955.e4154883.chunk.css": "/samurai-way-main/static/css/955.e4154883.chunk.css",
     "static/js/955.49c5fef1.chunk.js": "/samurai-way-main/static/js/955.49c5fef1.chunk.js",
     "static/js/131.7f9aebad.chunk.js": "/samurai-way-main/static/js/131.7f9aebad.chunk.js",
     "static/js/647.3a4555b2.chunk.js": "/samurai-way-main/static/js/647.3a4555b2.chunk.js",
@@ -13,10 +13,10 @@
     "static/media/preloader.svg": "/samurai-way-main/static/media/preloader.7f937069527c36c14f9172662cff9c7b.svg",
     "index.html": "/samurai-way-main/index.html",
     "main.102502ed.css.map": "/samurai-way-main/static/css/main.102502ed.css.map",
-    "main.c912d8b8.js.map": "/samurai-way-main/static/js/main.c912d8b8.js.map",
+    "main.92a9bcc6.js.map": "/samurai-way-main/static/js/main.92a9bcc6.js.map",
     "994.b8c5445a.chunk.css.map": "/samurai-way-main/static/css/994.b8c5445a.chunk.css.map",
     "994.210df594.chunk.js.map": "/samurai-way-main/static/js/994.210df594.chunk.js.map",
-    "955.11b38a66.chunk.css.map": "/samurai-way-main/static/css/955.11b38a66.chunk.css.map",
+    "955.e4154883.chunk.css.map": "/samurai-way-main/static/css/955.e4154883.chunk.css.map",
     "955.49c5fef1.chunk.js.map": "/samurai-way-main/static/js/955.49c5fef1.chunk.js.map",
     "131.7f9aebad.chunk.js.map": "/samurai-way-main/static/js/131.7f9aebad.chunk.js.map",
     "647.3a4555b2.chunk.js.map": "/samurai-way-main/static/js/647.3a4555b2.chunk.js.map",
@@ -24,6 +24,6 @@
   },
   "entrypoints": [
     "static/css/main.102502ed.css",
-    "static/js/main.c912d8b8.js"
+    "static/js/main.92a9bcc6.js"
   ]
 }
