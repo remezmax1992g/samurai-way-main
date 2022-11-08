@@ -11,7 +11,6 @@ import {initializing} from "./Redux/reducers/app-reducer";
 import store, {RootStateType} from "./Redux/redux-store";
 import Preloader from "./Components/common/Preloader/Preloader";
 import {WithSuspense} from "./Components/hoc/WithSuspense";
-
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'))
 const News = React.lazy(() => import('./Components/News/News'))
@@ -41,15 +40,15 @@ class App extends React.Component<AppType> {
                 <HeaderContainer/>
                 <div className="app-wrapper-content">
                    <Switch>
-                       <Route exact path="/" render={() => <Redirect to="/Login"/>}/>
-                       <Route path="/Dialogs" render={() => <SuspendedDialogs/>}/>
-                       <Route exact path="/Profile/:userId?" render={() => <SuspendedProfile/>}/>
-                       <Route exact path="/Users" render={() => <UsersContainer/>}/>
-                       <Route exact path="/News" render={() => <SuspendedNews/>}/>
-                       <Route exact path="/Music" render={() => <SuspendedMusic/>}/>
-                       <Route exact path="/Settings" render={() => <Settings/>}/>
-                       <Route exact path="/Login" render={() => <Login/>}/>
-                       <Route path="*" render={() => <div>404 - Page not found</div>}/>
+                       <Route  exact path="/" render={() => <Redirect to="/Login"/>}/>
+                       <Route exact path="/Dialogs"  render={() => <SuspendedDialogs/>}/>
+                       <Route  exact path="/Profile/:userId?"  render={() => <SuspendedProfile/>}/>
+                       <Route  exact path="/Users"  render={() => <UsersContainer/>}/>
+                       <Route exact path="/News"  render={() => <SuspendedNews/>}/>
+                       <Route exact path="/Music"  render={() => <SuspendedMusic/>}/>
+                       <Route  exact path="/Settings"  render={() => <Settings/>}/>
+                       <Route  exact path="/Login"  render={() => <Login/>}/>
+                       <Route exact path="*"  render={() => <div>404 - Page not found</div>}/>
                    </Switch>
                 </div>
             </div>

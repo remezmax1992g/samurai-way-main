@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from "./Header.module.css";
-import {NavLink} from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
+import {NavLink} from "react-router-dom";
 
 type HeaderType = {
     isAuth: boolean,
@@ -11,6 +11,7 @@ type HeaderType = {
 }
 
 const Header = (props: HeaderType) => {
+
     return (
         <header className={classes.header}>
             <NavBar/>
@@ -21,7 +22,7 @@ const Header = (props: HeaderType) => {
                         <img className={classes.avatar} src={props.photo}/>
                         <button onClick={props.logout}>Logout</button>
                     </div>
-                    : <NavLink to={"/Login"}>Login</NavLink>}
+                    : <NavLink to="/Login"><button>Login</button></NavLink>}
             </div>
         </header>
     );
