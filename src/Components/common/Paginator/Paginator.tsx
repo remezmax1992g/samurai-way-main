@@ -19,9 +19,8 @@ const Paginator = React.memo((props: PaginatorType) => {
     }
     const portionCount = Math.ceil(pagesCount / portionSize)
     const[portionNumber, setPortionNumber] = useState(Math.floor(currentPage/portionSize) + 1)
-    console.log(portionNumber)
     const leftPortionNumberPage = (portionNumber - 1) * portionSize + 1
-    const rightPortionNumberPage = portionNumber * portionSize
+    const rightPortionNumberPage = portionNumber * portionSize - 1
     return (
         <div>
             {portionNumber > 1 && <button onClick={() => setPortionNumber(() => portionNumber - 1)}>PREV</button>}
