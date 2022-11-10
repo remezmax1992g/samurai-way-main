@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useRef, useState} from 'react';
 import classes from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileType} from "../../../Redux/reducers/profile-reducer";
@@ -15,6 +15,7 @@ type ProfileInfoType = {
 
 const ProfileInfo = ({profile, isOwner, savePhoto}: ProfileInfoType) => {
     const [isEdit, setIsEdit] = useState(false)
+    const inputRef = useRef<HTMLInputElement>(null)
     const onChangeEditMode = () => {
         setIsEdit(!isEdit)
     }
@@ -23,12 +24,22 @@ const ProfileInfo = ({profile, isOwner, savePhoto}: ProfileInfoType) => {
             savePhoto(e.target.files[0])
         }
     }
+    const selectFileHandler = () => {
+        inputRef.current && inputRef.current.click()
+    }
     return (
         <div> {!profile
             ? <Preloader/>
             : <div className={classes.descriptionBlock}>
                 <div className={classes.imgProfileInfo}><img src={profile.photos.large || unknownUser}/></div>
-                {isOwner && <input type="file" onChange={onChangeProfilePhoto}/>}
+                {isOwner &&
+                    <><button onClick={selectFileHandler}>UPLOAD PHOTO</button>
+                    <input type="file"
+                           ref={inputRef}
+                           accept="image/*"
+                           style={{display: "none"}}
+                           onChange={onChangeProfilePhoto}/>
+                    </>}
                 <div>
                     {isEdit ? <ProfileDataForm setEditMode={onChangeEditMode}/>: <ProfileData profile={profile} setEditMode={onChangeEditMode} isOwner={isOwner}/>}
                     <ProfileStatusContainer/>
